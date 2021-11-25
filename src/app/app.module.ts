@@ -27,6 +27,7 @@ import { ClientComponent } from './layouts/client/client.component';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { SpinnerComponent } from './shared/spinner.component';
     SharedModule,
     RouterModule.forRoot(AppRoutes)
   ],
+  exports: [RouterModule],
   providers: [
     {
       provide: LocationStrategy,

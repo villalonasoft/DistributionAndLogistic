@@ -12,7 +12,7 @@ export interface Menu {
 }
 
 const MENUCLIENT = [
-      { state: 'orders',type: 'link', name: 'Generar Pedido',  icon: 'av_timer'},
+      { state: 'pedidos',type: 'link', name: 'Generar Pedido',  icon: 'av_timer'},
       { state: 'consult',type: 'link', name: 'Consultar Estado',  icon: 'av_timer'}
 ];
 
