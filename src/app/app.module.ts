@@ -31,9 +31,9 @@ import { SpinnerComponent } from './shared/spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
+    SpinnerComponent,
     FullComponent,
     AppHeaderComponent,
-    SpinnerComponent,
     AppSidebarComponent,
     ClientComponent,
     ClientSidebarComponent,

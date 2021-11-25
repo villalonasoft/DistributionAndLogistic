@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
+import { ExternalComponent } from './external/external.component';
 import { ClientComponent } from './layouts/client/client.component';
 
 export const AppRoutes: Routes = [
@@ -29,12 +30,17 @@ export const AppRoutes: Routes = [
     component: ClientComponent,
     children: [
       {
-        path: 'ordenes',
+        path: '',
+        redirectTo: 'modulo',
+        pathMatch: 'full'
+      },
+      {
+        path: '',
         loadChildren:
           () => import('./external/external.module').then(m => m.ExternalModule)
       },
       {
-        path: 'cliente/sss',
+        path: 'modulo',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
