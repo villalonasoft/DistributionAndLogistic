@@ -48,7 +48,6 @@ const MENUITEMS = [
       { state: 'units', type: 'link', name: 'Unidades', icon: 'view_headline'},
       { state: 'taxes', type: 'link', name: 'Impuestos', icon: 'tab'},
       { state: 'supplier', type: 'link', name: 'Supplidores', icon: 'web'},
-      { state: 'department', type: 'link', name: 'Departamento', icon: 'web'},
       { state: 'brand', type: 'link', name: 'Marcas', icon: 'web'},
     ]
   },
@@ -62,7 +61,6 @@ const MENUITEMS = [
       { state: 'units', type: 'link', name: 'Unidades', icon: 'view_headline'},
       { state: 'taxes', type: 'link', name: 'Impuestos', icon: 'tab'},
       { state: 'supplier', type: 'link', name: 'Supplidores', icon: 'web'},
-      { state: 'department', type: 'link', name: 'Departamento', icon: 'web'},
       { state: 'brand', type: 'link', name: 'Marcas', icon: 'web'},
     ]
   },
@@ -76,7 +74,6 @@ const MENUITEMS = [
       { state: 'units', type: 'link', name: 'Unidades', icon: 'view_headline'},
       { state: 'taxes', type: 'link', name: 'Impuestos', icon: 'tab'},
       { state: 'supplier', type: 'link', name: 'Supplidores', icon: 'web'},
-      { state: 'department', type: 'link', name: 'Departamento', icon: 'web'},
       { state: 'brand', type: 'link', name: 'Marcas', icon: 'web'},
     ]
   },

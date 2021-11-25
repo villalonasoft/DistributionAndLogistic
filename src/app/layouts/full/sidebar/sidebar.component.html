@@ -24,7 +24,6 @@
 <mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
     hideToggle *ngFor="let menuitem of menuItems.getMenuitem()"
-    routerLinkActive="selected"
     group="{{menuitem.name}}">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -40,6 +39,6 @@
               <span class="label label-{{ badge.type }}" *ngFor="let badge of submenu.badge">{{ badge.value }}</span>
           </a>
       </mat-list-item>
-  </mat-nav-list>
+    </mat-nav-list>
   </mat-expansion-panel>
 </mat-accordion>

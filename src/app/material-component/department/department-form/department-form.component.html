@@ -1,17 +1,17 @@
-<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
-  <input type="hidden" name="id" [value]="service.formData.id">
-
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1">
-        <!-- <fa-icon [icon]="user"></fa-icon> -->
-      </span>
-      <input type="text" class="form-control form-control-lg" placeholder="Nombre" aria-label="name"
-        aria-describedby="basic-addon1" name="name" #name='ngModel'
-        [(ngModel)]='service.formData.name' required>
-    </div>
-  </div>
-  <div class="d-grid gap-2">
-    <button class="btn btn-lg btn-block btn-info" type="submit" [disabled]="form.invalid">SUBMIT</button>
-  </div>
-</form>
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Crear/Editar Departamento</mat-card-title>
+    <mat-card-subtitle>Creacion de departamento para categorizar los productos</mat-card-subtitle>
+    <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+      <input type="hidden" name="id" [value]="service.formData.id">
+      <mat-form-field>
+        <input matInput type="text" class="form-control form-control-lg" placeholder="Nombre del departamento" aria-label="name"
+          aria-describedby="basic-addon1" name="name" #name='ngModel'
+          [(ngModel)]='service.formData.name' required>
+      </mat-form-field>
+      <div class="button-row">
+        <button mat-raised-button color="primary" matTooltip="Guardar" matTooltipPosition="right" type="submit" [disabled]="form.invalid">Guardar</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

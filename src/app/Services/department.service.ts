@@ -25,9 +25,8 @@ export class DepartmentService {
   list:department[]=new Array();
 
   postDepartment(){
-    console.log(this.formData)
-    this.seed.push(this.formData);
-    console.log(this.seed)
+    this.formData.id = this.seed.length+1;
+    this.seed.push({...this.formData});
   }
 
   putDeparment(){
