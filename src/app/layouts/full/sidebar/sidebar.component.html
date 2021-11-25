@@ -24,7 +24,8 @@
 <mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
     hideToggle *ngFor="let menuitem of menuItems.getMenuitem()"
-    group="{{menuitem.name}}">
+    group="{{menuitem.name}}"
+    >
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{menuitem.name}}
