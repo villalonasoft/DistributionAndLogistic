@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from 'src/app/Services/department.service';
 
 @Component({
   selector: 'app-department',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service:DepartmentService) { }
 
   ngOnInit(): void {
+    this.service.refreshList();
   }
 
 }
