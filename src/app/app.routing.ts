@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ClientComponent } from './layouts/client/client.component';
 
 import { FullComponent } from './layouts/full/full.component';
 
@@ -20,6 +21,16 @@ export const AppRoutes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      }
+    ]
+  },
+  {
+    path: 'areaclientes',
+    component: ClientComponent,
+    children:[
+      {
+        path:'areaclientes',
+        loadChildren:() => import('./client/client.module').then(m=>m.ClientModule)
       }
     ]
   }

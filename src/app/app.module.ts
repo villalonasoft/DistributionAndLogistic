@@ -8,12 +8,21 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 
+//common area
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DemoMaterialModule } from './demo-material-module';
+
+//company area
 import { FullComponent } from './layouts/full/full.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DemoMaterialModule } from './demo-material-module';
+
+//client area
+import { ClientSidebarComponent } from './layouts/client/sidebar/sidebar.component';
+import { ClientHeaderComponent } from './layouts/client/header/header.component';
+import { ClientComponent } from './layouts/client/client.component';
+
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
@@ -24,7 +33,10 @@ import { SpinnerComponent } from './shared/spinner.component';
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    ClientComponent,
+    ClientSidebarComponent,
+    ClientHeaderComponent
   ],
   imports: [
     BrowserModule,
