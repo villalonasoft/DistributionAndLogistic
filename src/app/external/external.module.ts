@@ -10,12 +10,18 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HomeComponent } from './home/home.component';
+import { RealtimeComponent } from './realtime/realtime.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     ExternalComponent,
     OrderComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    HomeComponent,
+    RealtimeComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,

@@ -5,4 +5,12 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: []
 })
-export class ClientHeaderComponent {}
+export class ClientHeaderComponent {
+
+  title = 'Tic Tac Toe';
+  isAuthenticated = false;
+
+  async logout(): Promise<void> {
+    // todo
+  }
+}
