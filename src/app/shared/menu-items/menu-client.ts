@@ -12,8 +12,9 @@ export interface Menu {
 }
 
 const MENUCLIENT = [
-      { state: 'pedidos',type: 'link', name: 'Generar Pedido',  icon: 'av_timer'},
-      { state: 'consult',type: 'link', name: 'Consultar Estado',  icon: 'av_timer'}
+      { state: 'home',type: 'link', name: 'Home',  icon:"home"},
+      { state: 'ordenar',type: 'link', name: 'Realizar Pedido',  icon: 'add_shopping_cart'},
+      { state: 'lista-pedidos',type: 'link', name: 'Listado de pedidos',  icon: 'view_list'}
 ];
 
 @Injectable()

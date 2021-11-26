@@ -31,17 +31,8 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'modulo',
-        pathMatch: 'full'
-      },
-      {
-        path: '',
         loadChildren:
           () => import('./external/external.module').then(m => m.ExternalModule)
-      },
-      {
-        path: 'modulo',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
   }
