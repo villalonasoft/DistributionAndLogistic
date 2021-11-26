@@ -47,7 +47,7 @@ import { SpinnerComponent } from './shared/spinner.component';
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes,{useHash:true})
   ],
   exports: [RouterModule],
   providers: [
