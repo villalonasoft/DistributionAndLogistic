@@ -26,7 +26,7 @@
 
     <mat-nav-list appAccordion>
       <mat-list-item appAccordionLink *ngFor="let submenu of menuItems.getMenuitem()" routerLinkActive="selected" group="{{submenu.state}}">
-          <a class="" appAccordionToggle [routerLink]="['/', submenu.state]" *ngIf="submenu.type === 'link'">
+          <a class="" appAccordionToggle [routerLink]="['/app/', submenu.state]" *ngIf="submenu.type === 'link'">
               <mat-icon>{{ submenu.icon }}</mat-icon>
               <span>{{ submenu.name }}</span>
               <span fxFlex></span>
