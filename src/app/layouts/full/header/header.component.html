@@ -13,4 +13,50 @@
     <button mat-menu-item>
         <mat-icon>exit_to_app</mat-icon> Sign Out </button>
 </mat-menu> -->
+<style type="text/css">
+  .expanded-toolbar {
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+
+
+
+<div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
+    <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
+      <mat-icon>power_settings_new</mat-icon>
+      Inicio de sesion
+    </button>
+    <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Cerrar sesion
+    </button>
+    <button mat-button routerLink="/">
+      <mat-icon>gamepad</mat-icon>
+      Tiempo Real
+    </button>
+  </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/">
+    <mat-icon>home</mat-icon>
+    Home
+  </button>
+  <button mat-menu-item routerLink="/">
+    <mat-icon>gamepad</mat-icon>
+    Tiempo Real
+  </button>
+  <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
+    <mat-icon>power_settings_new</mat-icon>
+    Inicio de sesion
+  </button>
+  <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    Cerrar sesion
+  </button>
+</mat-menu>
+
 

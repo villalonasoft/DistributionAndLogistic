@@ -5,6 +5,7 @@ import { ClientComponent } from './layouts/client/client.component';
 import { LoginComponent } from './layouts/client/login/login.component';
 
 import { AuthGuardService } from './Services/auth-guard.service';
+import { LockscreenComponent } from './layouts/lockscreen/lockscreen.component';
 
 export const AppRoutes: Routes = [
   {
@@ -16,17 +17,15 @@ export const AppRoutes: Routes = [
       { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
     ]
   },
-  { path: 'app', component: ClientComponent,
+  { path: 'app',
+    component: ClientComponent,
     children: [
       {path: '', loadChildren:() => import('./external/external.module').then(m => m.ExternalModule),canActivate: [ AuthGuardService ]},
-      {path:'login',component:LoginComponent
-      // ,
-      //   children:[
-      //     {
-      //       path:'callback'
-      //     }
-      //   ]
-      },
+      {path:'login',component:LoginComponent},
     ],
+  },
+  {
+    path:'login',
+    component:LockscreenComponent
   }
 ];

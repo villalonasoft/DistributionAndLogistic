@@ -27,6 +27,7 @@ import { ClientComponent } from './layouts/client/client.component';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './layouts/client/login/login.component';
+import { LockscreenComponent } from './layouts/lockscreen/lockscreen.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { LoginComponent } from './layouts/client/login/login.component';
     ClientComponent,
     ClientSidebarComponent,
     ClientHeaderComponent,
-    LoginComponent
+    LoginComponent,
+    LockscreenComponent
   ],
   imports: [
     BrowserModule,
