@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
@@ -26,24 +26,29 @@ import { ClientComponent } from './layouts/client/client.component';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { LoginComponent } from './layouts/client/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SpinnerComponent,
+
     FullComponent,
     AppHeaderComponent,
     AppSidebarComponent,
+
     ClientComponent,
     ClientSidebarComponent,
-    ClientHeaderComponent
+    ClientHeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,

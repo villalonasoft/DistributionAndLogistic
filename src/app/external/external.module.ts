@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './home/home.component';
 import { RealtimeComponent } from './realtime/realtime.component';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,7 @@ import { LoginComponent } from './login/login.component';
     OrderComponent,
     CreateOrderComponent,
     HomeComponent,
-    RealtimeComponent,
-    LoginComponent
+    RealtimeComponent
   ],
   imports: [
     CommonModule,
