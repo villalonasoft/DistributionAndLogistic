@@ -19,14 +19,13 @@
         <button mat-menu-item>
             <mat-icon>exit_to_app</mat-icon> Cerrar Sesion </button>
     </mat-menu>
-
 </div>
 <mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
     hideToggle *ngFor="let menuitem of menuItems.getMenuitem()"
     group="{{menuitem.name}}"
     >
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header routerLinkActive="selected">
       <mat-panel-title>
         {{menuitem.name}}
       </mat-panel-title>

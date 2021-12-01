@@ -9,6 +9,9 @@
         <!-- ============================================================== -->
         <!-- Logo - style you can find in header.scss -->
         <!-- ============================================================== -->
+        <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed">
+          <mat-icon>menu</mat-icon>
+        </button>
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
                 <!-- Logo icon --><b>
@@ -24,17 +27,15 @@
                  <!-- dark Logo text -->
                  <!-- <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo"> -->
                  <!-- Light Logo text -->
-                 <label class="text-white">Logistica</label>
                  <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage"> -->
+                 <label class="text-white">Logistica</label>
                 </span> </a>
         </div>
         <!-- ============================================================== -->
         <!-- sidebar toggle -->
         <!-- ============================================================== -->
 
-        <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed">
-            <mat-icon>menu</mat-icon>
-        </button>
+
         <span fxFlex></span>
         <!-- ============================================================== -->
         <!-- app header component - style you can find in header.scss / header.component.ts-->
