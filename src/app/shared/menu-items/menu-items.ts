@@ -50,7 +50,7 @@ const MENUITEMS = [
       { state: 'pickers', type: 'link', name: 'Pedidos', icon: 'view_list'},
       { state: 'units', type: 'link', name: 'Cliente-Pedido', icon: 'view_headline'},
       { state: 'taxes', type: 'link', name: 'Compras', icon: 'tab'},
-      { state: 'supplier', type: 'link', name: 'Productos', icon: 'web'},
+      { state: "reportpresentation", type: 'link', name: 'Productos', icon: 'web'},
       { state: 'brand', type: 'link', name: 'Marcas', icon: 'web'},
     ]
   },

@@ -33,6 +33,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentFormComponent } from './department/department-form/department-form.component';
+import { ReportPresentationComponent } from './reports/reportpresentation/reportpresentation.component';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { DepartmentFormComponent } from './department/department-form/department
     SliderComponent,
     SlideToggleComponent,
     DepartmentComponent,
-    DepartmentFormComponent
+    DepartmentFormComponent,
+    ReportPresentationComponent
   ]
 })
 export class MaterialComponentsModule {}
