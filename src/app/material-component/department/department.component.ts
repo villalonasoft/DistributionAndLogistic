@@ -13,5 +13,4 @@ export class DepartmentComponent implements OnInit {
   ngOnInit(): void {
     this.service.refreshList();
   }
-
 }
