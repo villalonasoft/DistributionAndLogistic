@@ -32,7 +32,7 @@ const MENUITEMS = [
     name:"Transacciones",
     submenu:[
       { state: 'brand', type: 'link', name: 'Act. de precios', icon: 'web'},
-      { state: 'dashboard', name: 'Gestionar Ordenes', type: 'link', icon: 'av_timer'},
+      { state: 'gestion', name: 'Gestionar Ordenes', type: 'link', icon: 'av_timer'},
       { state: 'button', type: 'link', name: 'Recepcion de pedidos', icon: 'crop_7_5'},
       { state: 'grid', type: 'link', name: 'Ajustes de inventario', icon: 'view_comfy'},
       { state: 'lists', type: 'link', name: 'Facturacion', icon: 'view_list'},

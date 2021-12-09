@@ -18,11 +18,16 @@ import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { DepartmentComponent } from './department/department.component';
 import { ReportPresentationComponent } from './reports/reportpresentation/reportpresentation.component';
+import { OrderworkComponent } from './transactions/orderwork/orderwork.component';
 
 export const MaterialRoutes: Routes = [
   {
     path:'department',
     component: DepartmentComponent
+  },
+  {
+    path:'gestion',
+    component:OrderworkComponent
   },
   {
     path: 'button',
