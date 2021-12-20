@@ -10,3 +10,13 @@ table {
 td, th {
   width: 25%;
 }
+
+.mat-column-customer{
+  width: 120px;
+  padding-right: 24px;
+}
+
+.mat-column-orderType{
+  width: 10px;
+  padding-left: 24px;
+}
