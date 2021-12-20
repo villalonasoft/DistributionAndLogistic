@@ -15,8 +15,9 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./orderworkdetails.component.css']
 })
 export class OrderworkdetailsComponent implements AfterViewInit{
-  displayedColumns: string[] = ['customer','orderType','date','priority','mount','reference'];
+  displayedColumns: string[] = ['customer','orderType','date','priority','mount','reference','acciones'];
   data:MatTableDataSource<Orders>;
+  dataWorking:MatTableDataSource<Orders>;
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -26,13 +27,10 @@ export class OrderworkdetailsComponent implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public service:OrderServices, public dialog:MatDialog) {
-    this.data = new MatTableDataSource();
+    this.dataWorking = new MatTableDataSource();
   }
 
   ngAfterViewInit(){
-    this.data.paginator = this.paginator;
-    this.data.sort = this.sort;
-
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
@@ -50,7 +48,12 @@ export class OrderworkdetailsComponent implements AfterViewInit{
           this.resultsLength = data.length;
           return data;
         })
-      ).subscribe(data => this.data = new MatTableDataSource(data));
+      ).subscribe(data =>{
+        this.data = new MatTableDataSource(data.filter(x=>x.status==100));
+        this.data.paginator = this.paginator;
+        this.data.sort = this.sort;
+      });
+
   }
 
   applyFilter(handle:Event) {
@@ -63,30 +66,14 @@ export class OrderworkdetailsComponent implements AfterViewInit{
   }
 
   openDialog(id:number){
-    this.service.refreshDetail(id).then(res=>{
-      if(res == true)
-      {
-        const dialogRef = this.dialog.open(ModalComponent,{
-          data:this.service.detailOrder
-        });
-
-        dialogRef.afterClosed().subscribe(result=>{
-          console.log(`Dialog reult: ${result}`);
-        });
-      }
+    const dialogRef = this.dialog.open(ModalComponent,{
+      data:id,
+      height: '400px',
+      width: '1200px',
     });
-  }
 
-  onDeleted(id:number){
-    if(confirm("Are you sure to delete this record?"))
-    {
-      this.service.deletePaymentDetail(id)
-        .subscribe(
-          res=>{
-            this.service.refreshList();
-          },
-          err=>{console.log(err)}
-        );
-    }
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`Dialog reult: ${result}`);
+    });
   }
 }

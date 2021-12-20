@@ -11,5 +11,5 @@ export class Orders{
   mount:number=0;
   reference:string="";
   status:number=0;
-  OrderDetails:OrderDetail[]= new Array()
+  orderDetails:OrderDetail[]= new Array()
 }

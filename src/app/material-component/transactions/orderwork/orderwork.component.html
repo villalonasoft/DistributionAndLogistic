@@ -1,44 +1,66 @@
+
 <app-orderworkdetails></app-orderworkdetails>
 
-
-<mat-card>
+<mat-card class="cardActiva mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>ORDENES ACTIVAS</mat-card-title>
+    <mat-card-subtitle>Esta ventana muestra todas las ordenes que estan a la espera de ser gestionadas</mat-card-subtitle>
+  </mat-card-header>
   <mat-card-content>
-    <div>
-      <h1 class="display-4 text-center">ORDENES ACTIVAS</h1>
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+    <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+      <!-- <mat-spinner *ngIf="isLoadingResults"></mat-spinner> -->
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        SOSOVISH-SLD-API No respondio a tiempo en varios intentos, intente luego mas tarde!
+      </div>
     </div>
+    <div class="mat-elevation-z4">
+      <mat-table [dataSource]="dataWorking" matSort matSortActive="status" matSortDisableClear matSortDirection="asc">
+        <ng-container matColumnDef="customer">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.customer}} </mat-cell>
+        </ng-container>
 
-    <div class="row">
-      <div class="col-md-6">
+        <ng-container matColumnDef="orderType">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Origen </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.orderType}} </mat-cell>
+        </ng-container>
 
-      </div>
-      <div class="col-md-6" style="overflow: auto;">
-        <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th>Cliente</th>
-              <th>Origen</th>
-              <th>Inicio</th>
-              <th>finalizacion</th>
-              <th>Monto</th>
-              <th>Estado</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pd of service.listInWork">
-              <td (click)="openDialog(pd.id)">{{pd.customer}}</td>
-              <td (click)="openDialog(pd.id)">{{pd.orderType}}</td>
-              <td (click)="openDialog(pd.id)">{{pd.initDate}}</td>
-              <td (click)="openDialog(pd.id)">{{pd.endDate}}</td>
-              <td (click)="openDialog(pd.id)">{{pd.mount|currency:'DOP'}}</td>
-              <td (click)="openDialog(pd.id)">{{pd.status}}</td>
-              <td>
-                <i><fa-icon [icon]="trashIcon" (click)="onDeleted(pd.id)" ></fa-icon></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <ng-container matColumnDef="initDate">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Inicio </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.initDate}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Finalizacion </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.endDate}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="mount">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Monto </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.mount|currency:'DOP'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> <a [routerLink]="" (click)="openDialog(element.id)">Ver Detalle</a> | </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of users"></mat-paginator>
     </div>
   </mat-card-content>
 </mat-card>

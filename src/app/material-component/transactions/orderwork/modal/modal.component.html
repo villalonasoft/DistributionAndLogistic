@@ -1,36 +1,59 @@
-<div>
-  <h1 class="display-4 text-center">Lista de Articulos</h1>
+<mat-form-field appearance="standard">
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex." #input>
+</mat-form-field>
+
+<div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+  <!-- <mat-spinner *ngIf="isLoadingResults"></mat-spinner> -->
+  <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+    SOSOVISH-SLD-API No respondio a tiempo en varios intentos, intente luego mas tarde!
+  </div>
 </div>
 
-<div class="row">
-  <div class="col-md-6">
+<div class="mat-elevation-z4">
+  <mat-table [dataSource]="orderDetail" matSort matSortActive="customer" matSortDisableClear matSortDirection="desc">
+    <ng-container matColumnDef="completeCode">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> completeCode </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.completeCode}} </mat-cell>
+    </ng-container>
 
-  </div>
-  <div class="col-md-6" style="overflow:auto;">
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th>Codigo</th>
-          <th>Nombre</th>
-          <th>Unidad</th>
-          <th>Existencia</th>
-          <th>Cantidad Pedida</th>
-          <th>Cantidad Contada</th>
-          <th>Zona</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pd of data">
-          <td >{{pd.completeCode}}</td>
-          <td >{{pd.name}}</td>
-          <td >{{pd.unit}}</td>
-          <td >{{pd.stock}}</td>
-          <td >{{pd.cuantityOrder}}</td>
-          <td >{{pd.cuantityPicked}}</td>
-          <td >{{pd.zone}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> name </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> unit </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="stock">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> stock </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cuantityOrder">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> cuantityOrder </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.cuantityOrder}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cuantityPicked">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> cuantityPicked </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.cuantityPicked}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="zone">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> zone </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">{{element.zone}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of users"></mat-paginator>
 </div>
