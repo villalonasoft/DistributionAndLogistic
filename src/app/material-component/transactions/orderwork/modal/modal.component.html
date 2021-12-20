@@ -1,0 +1,36 @@
+<div>
+  <h1 class="display-4 text-center">Lista de Articulos</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+  </div>
+  <div class="col-md-6" style="overflow:auto;">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Codigo</th>
+          <th>Nombre</th>
+          <th>Unidad</th>
+          <th>Existencia</th>
+          <th>Cantidad Pedida</th>
+          <th>Cantidad Contada</th>
+          <th>Zona</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pd of data">
+          <td >{{pd.completeCode}}</td>
+          <td >{{pd.name}}</td>
+          <td >{{pd.unit}}</td>
+          <td >{{pd.stock}}</td>
+          <td >{{pd.cuantityOrder}}</td>
+          <td >{{pd.cuantityPicked}}</td>
+          <td >{{pd.zone}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

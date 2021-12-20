@@ -1,81 +1,92 @@
-import { Component, OnInit } from '@angular/core';
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material/table';
-import { OrdersService } from 'src/app/Services/orders.service';
+import { OrderServices } from 'src/app/shared/Rest/order.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 import { Orders } from 'src/app/models/orders.model';
+import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort, SortDirection} from '@angular/material/sort';
+import {merge, Observable, of as observableOf} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-orderworkdetails',
   templateUrl: './orderworkdetails.component.html',
   styleUrls: ['./orderworkdetails.component.css']
 })
-export class OrderworkdetailsComponent implements OnInit {
+export class OrderworkdetailsComponent implements AfterViewInit{
+  displayedColumns: string[] = ['customer','orderType','date','priority','mount','reference'];
+  data:MatTableDataSource<Orders>;
 
-  constructor(public service:OrdersService) {
-    this.service.refreshInProcesList();
-   }
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
 
-  ELEMENT_DATA:Orders[]=new Array();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  inProcesList:Orders[]=[
-    {
-      id:1,
-      customerId:1,
-      customerName:'Cliente 1',
-      date:new Date(2021,12,9),
-      status: 100,
-      progress:0
-    },
-    {
-      id:2,
-      customerId:2,
-      customerName:'Cliente 2',
-      date:new Date(2021,12,9),
-      status: 100,
-      progress:0
-    },
-    {
-      id:1,
-      customerId:3,
-      customerName:'Cliente 3',
-      date:new Date(2021,12,9),
-      status: 100,
-      progress:0
-    }
-  ];
-
-  ngOnInit(): void {
-    this.service.refreshList();
-    console.log(this.service.list);
-    console.log(this.inProcesList);
+  constructor(public service:OrderServices, public dialog:MatDialog) {
+    this.data = new MatTableDataSource();
   }
 
-  dataSource = new MatTableDataSource<Orders>(this.service.list);
-  displayedColumns: string[] = ['select', 'customerName', 'id', 'date', 'progress','status'];
-  selection = new SelectionModel<Orders>(true, []);
+  ngAfterViewInit(){
+    this.data.paginator = this.paginator;
+    this.data.sort = this.sort;
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.service!.getAll()
+            .pipe(catchError(() => observableOf(null)));
+        }),
+        map(data => {
+          this.isLoadingResults = false;
+          this.isRateLimitReached = data === null;
+          if (data === null) {
+            return [];
+          }
+          this.resultsLength = data.length;
+          return data;
+        })
+      ).subscribe(data => this.data = new MatTableDataSource(data));
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
+  applyFilter(handle:Event) {
+    const filterValue = (handle.target as HTMLInputElement).value;
+    this.data.filter = filterValue.trim().toLowerCase();
 
-    this.selection.select(...this.dataSource.data);
+    if (this.data.paginator) {
+      this.data.paginator.firstPage();
+    }
   }
 
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Orders): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+  openDialog(id:number){
+    this.service.refreshDetail(id).then(res=>{
+      if(res == true)
+      {
+        const dialogRef = this.dialog.open(ModalComponent,{
+          data:this.service.detailOrder
+        });
+
+        dialogRef.afterClosed().subscribe(result=>{
+          console.log(`Dialog reult: ${result}`);
+        });
+      }
+    });
+  }
+
+  onDeleted(id:number){
+    if(confirm("Are you sure to delete this record?"))
+    {
+      this.service.deletePaymentDetail(id)
+        .subscribe(
+          res=>{
+            this.service.refreshList();
+          },
+          err=>{console.log(err)}
+        );
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 }

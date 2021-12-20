@@ -36,6 +36,7 @@ import { DepartmentFormComponent } from './department/department-form/department
 import { ReportPresentationComponent } from './reports/reportpresentation/reportpresentation.component';
 import { OrderworkComponent } from './transactions/orderwork/orderwork.component';
 import { OrderworkdetailsComponent } from './transactions/orderwork/orderworkdetails/orderworkdetails.component';
+import { ModalComponent } from './transactions/orderwork/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { OrderworkdetailsComponent } from './transactions/orderwork/orderworkdet
     DepartmentFormComponent,
     ReportPresentationComponent,
     OrderworkComponent,
-    OrderworkdetailsComponent
+    OrderworkdetailsComponent,
+    ModalComponent
   ]
 })
 export class MaterialComponentsModule {}
