@@ -49,7 +49,7 @@ export class ModalComponent implements AfterViewInit {
           }
           console.log(data.orderDetails)
           this.resultsLength = data.orderDetails?.length;
-          this.orderHeader;
+          this.orderHeader=data;
           return data.orderDetails;
         })
       ).subscribe(data =>{

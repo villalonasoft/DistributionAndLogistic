@@ -74,7 +74,7 @@ export class OrderworkComponent implements AfterViewInit {
  openDialog(id:number){
   const dialogRef = this.dialog.open(ModalComponent,{
     data:id,
-    height: '400px',
+    height: '800px',
     width: '1200px',
   });
 
