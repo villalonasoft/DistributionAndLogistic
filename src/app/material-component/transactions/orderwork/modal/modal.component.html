@@ -1,49 +1,45 @@
-  <div class="container">
-    <div class="col-sm">
-      <mat-form-field appearance="outline">
-        <mat-label>NUMERO DE PEDIDO</mat-label>
-        <input matInput disabled value="{{orderHeader.id}}">
-      </mat-form-field>
-    </div>
-    <div class="col-sm">
-      <mat-form-field appearance="outline">
-        <mat-label>CLIENTE</mat-label>
-        <input matInput disabled value="{{orderHeader.customer}}">
-      </mat-form-field>
-    </div>
-  <mat-form-field appearance="outline">
-    <mat-label>ORIGEN</mat-label>
-    <input matInput disabled value="{{orderHeader.OrderType}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>INICIO</mat-label>
-    <input matInput disabled value="{{orderHeader.initDate}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>FIN</mat-label>
-    <input matInput disabled value="{{orderHeader.endDate}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>PRIORIDAD</mat-label>
-    <input matInput disabled value="{{orderHeader.priority}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>MONTO</mat-label>
-    <input matInput disabled value="{{orderHeader.mount}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>REFERENCIA</mat-label>
-    <input matInput disabled value="{{orderHeader.reference}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>ESTADO</mat-label>
-    <input matInput disabled value="{{orderHeader.status}}">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>CANTIDAD DE ARTICULOS</mat-label>
-    <input matInput disabled value="{{orderHeader.orderDetails.length}}">
-  </mat-form-field>
-</div>
+
+<mat-form-field appearance="outline">
+  <mat-label>NUMERO DE PEDIDO</mat-label>
+  <input matInput disabled value="{{orderHeader.id}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>CLIENTE</mat-label>
+  <input matInput disabled value="{{orderHeader.customer}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>ORIGEN</mat-label>
+  <input matInput disabled value="{{orderHeader.OrderType}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>INICIO</mat-label>
+  <input matInput disabled value="{{orderHeader.initDate}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>FIN</mat-label>
+  <input matInput disabled value="{{orderHeader.endDate}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>PRIORIDAD</mat-label>
+  <input matInput disabled value="{{orderHeader.priority}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>MONTO</mat-label>
+  <input matInput disabled value="{{orderHeader.mount}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>REFERENCIA</mat-label>
+  <input matInput disabled value="{{orderHeader.reference}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>ESTADO</mat-label>
+  <input matInput disabled value="{{orderHeader.status}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>CANTIDAD DE ARTICULOS</mat-label>
+  <input matInput disabled value="{{orderHeader.orderDetails.length}}">
+</mat-form-field>
+
 <mat-form-field appearance="standard">
   <mat-label>Buscar</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex." #input>
