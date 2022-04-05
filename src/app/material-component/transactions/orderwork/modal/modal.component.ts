@@ -10,13 +10,18 @@ import { MatDialog } from '@angular/material/dialog';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
+export interface DialogData{
+  branchId:number;
+  orderId:number;
+}
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements AfterViewInit {
-  displayedColumns: string[] = ['completeCode','name','unit','stock','cuantityOrder','cuantityPicked','zone'];
+  displayedColumns: string[] = ['productCode','productName','unit','orderedQuantity','location','zone'];
   orderDetail:MatTableDataSource<OrderDetail>;
   orderHeader:Orders;
 
@@ -27,7 +32,7 @@ export class ModalComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(@Inject(MAT_DIALOG_DATA)public orderId:number,public service:OrderServices) {
+  constructor(@Inject(MAT_DIALOG_DATA)public data: DialogData,public service:OrderServices) {
     this.orderDetail = new MatTableDataSource();
     this.orderHeader = new Orders;
   }
@@ -38,7 +43,7 @@ export class ModalComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.service!.getOrderById(this.orderId)
+          return this.service!.getOrderById(this.data.orderId,this.data.branchId)
             .pipe(catchError(() => observableOf(null)));
         }),
         map(data => {
@@ -47,10 +52,9 @@ export class ModalComponent implements AfterViewInit {
           if (data === null) {
             return [];
           }
-          console.log(data.orderDetails)
-          this.resultsLength = data.orderDetails?.length;
+          this.resultsLength = data.detail?.length;
           this.orderHeader=data;
-          return data.orderDetails;
+          return data.detail;
         })
       ).subscribe(data =>{
         this.orderDetail = new MatTableDataSource(data);

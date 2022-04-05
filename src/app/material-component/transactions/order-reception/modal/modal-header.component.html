@@ -1,26 +1,36 @@
 <mat-form-field appearance="outline">
   <mat-label>NUMERO DE PEDIDO</mat-label>
-  <input matInput disabled value="{{orderHeader.orderId}}">
+  <input matInput disabled
+    value="CL{{orderHeader.branchId.toString().padStart(3,'0')}}PE{{orderHeader.orderId.toString().padStart(10,'0')}}Z{{orderHeader.zoneId.toString().padStart(2,'0')}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>MODO</mat-label>
+  <input matInput disabled value="{{orderHeader.mode}}">
 </mat-form-field>
 <mat-form-field appearance="outline">
   <mat-label>CLIENTE</mat-label>
   <input matInput disabled value="{{orderHeader.branchName}}">
 </mat-form-field>
 <mat-form-field appearance="outline">
-  <mat-label>REFERENCIA</mat-label>
-  <input matInput disabled value="{{orderHeader.reference}}">
-</mat-form-field>
-<mat-form-field appearance="outline">
-  <mat-label>TIPO</mat-label>
-  <input matInput disabled value="{{orderHeader.mode}}">
-</mat-form-field>
-<mat-form-field appearance="outline">
-  <mat-label>FECHA</mat-label>
-  <input matInput disabled value="{{orderHeader.date}}">
-</mat-form-field>
-<mat-form-field appearance="outline">
-  <mat-label>ESTATO</mat-label>
+  <mat-label>Estado</mat-label>
   <input matInput disabled value="{{orderHeader.status}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Usuario Asignado</mat-label>
+  <input matInput disabled value="{{orderHeader.user}}">
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>Zona</mat-label>
+  <input matInput disabled value="{{orderHeader.zones}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Fecha de inicio</mat-label>
+  <input matInput disabled value="{{orderHeader.dateInit}}">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Fecha de fin</mat-label>
+  <input matInput disabled value="{{orderHeader.dateEnd}}">
 </mat-form-field>
 
 <mat-form-field appearance="standard">
@@ -37,9 +47,9 @@
 
 <div class="mat-elevation-z4">
   <mat-table [dataSource]="orderDetail" matSort matSortActive="customer" matSortDisableClear matSortDirection="desc">
-    <ng-container matColumnDef="productCode">
+    <ng-container matColumnDef="completeCode">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Codigo </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.productCode}} </mat-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.completeCode}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="productName">
@@ -47,14 +57,19 @@
       <mat-cell mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="unit">
+    <ng-container matColumnDef="units">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Unidad </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.unit}} </mat-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.units}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="orderedQuantity">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let element"> {{element.orderedQuantity}} </mat-cell>
+    <ng-container matColumnDef="quantityAvailable">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad Pedida </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.quantityAvailable}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="countedQuantity">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad Contada </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.countedQuantity}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="location">
@@ -65,6 +80,11 @@
     <ng-container matColumnDef="zone">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Zona </mat-header-cell>
       <mat-cell mat-cell *matCellDef="let element"> {{element.zone}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

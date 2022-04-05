@@ -11,32 +11,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialRoutes } from './material.routing';
-import { ButtonsComponent } from './buttons/buttons.component';
 
-import { GridComponent } from './grid/grid.component';
-import { ListsComponent } from './lists/lists.component';
-import { MenuComponent } from './menu/menu.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { StepperComponent } from './stepper/stepper.component';
-import { ExpansionComponent } from './expansion/expansion.component';
-import { ChipsComponent } from './chips/chips.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ProgressSnipperComponent } from './progress-snipper/progress-snipper.component';
-import { ProgressComponent } from './progress/progress.component';
-import {
-  DialogComponent,
-  DialogOverviewExampleDialogComponent
-} from './dialog/dialog.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
-import { SnackbarComponent } from './snackbar/snackbar.component';
-import { SliderComponent } from './slider/slider.component';
-import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
-import { DepartmentComponent } from './department/department.component';
-import { DepartmentFormComponent } from './department/department-form/department-form.component';
-import { ReportPresentationComponent } from './reports/reportpresentation/reportpresentation.component';
 import { OrderworkComponent } from './transactions/orderwork/orderwork.component';
-import { OrderworkdetailsComponent } from './transactions/orderwork/orderworkdetails/orderworkdetails.component';
+import { OrderReceptionComponent } from './transactions/order-reception/order-reception.component';
 import { ModalComponent } from './transactions/orderwork/modal/modal.component';
+import { ModalHeaderComponent } from './transactions/order-reception/modal/modal-header.component';
+import { DashboarComponent } from './dashboar/dashboar.component';
 
 @NgModule({
   imports: [
@@ -50,31 +30,12 @@ import { ModalComponent } from './transactions/orderwork/modal/modal.component';
     CdkTableModule
   ],
   providers: [],
-  entryComponents: [DialogOverviewExampleDialogComponent],
   declarations: [
-    ButtonsComponent,
-    GridComponent,
-    ListsComponent,
-    MenuComponent,
-    TabsComponent,
-    StepperComponent,
-    ExpansionComponent,
-    ChipsComponent,
-    ToolbarComponent,
-    ProgressSnipperComponent,
-    ProgressComponent,
-    DialogComponent,
-    DialogOverviewExampleDialogComponent,
-    TooltipComponent,
-    SnackbarComponent,
-    SliderComponent,
-    SlideToggleComponent,
-    DepartmentComponent,
-    DepartmentFormComponent,
-    ReportPresentationComponent,
+    ModalComponent,
+    ModalHeaderComponent,
     OrderworkComponent,
-    OrderworkdetailsComponent,
-    ModalComponent
+    OrderReceptionComponent,
+    DashboarComponent,
   ]
 })
 export class MaterialComponentsModule {}

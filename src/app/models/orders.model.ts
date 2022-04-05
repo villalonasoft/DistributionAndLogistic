@@ -1,15 +1,14 @@
 import { OrderDetail } from "./orderdetail.model";
 
 export class Orders{
-  id:number=0;
-  customer:string="";
-  OrderType:string="";
-  date:string="";
-  initDate:Date=new Date();
-  endDate:Date=new Date();
-  priority:number=0;
-  mount:number=0;
+  branchId:number=0;
+  orderId:number=0;
+  branchName:string="";
   reference:string="";
-  status:number=0;
-  orderDetails:OrderDetail[]= new Array()
+  status:string="";
+  statusId:number=0;
+  backgroudColor:string="";
+  date:Date=new Date();
+  mode:string="";
+  detail:OrderDetail[]= new Array()
 }

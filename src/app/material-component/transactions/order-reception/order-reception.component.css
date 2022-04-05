@@ -1,0 +1,48 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.mat-column-branch {
+  padding-right: 0px;
+  margin-right: -30px;
+}
+
+.mat-column-mode {
+  padding-right: 0px;
+  margin-right: -30px;
+}
+
+.mat-column-zones {
+  padding-right: 0px;
+  margin-right: -10px;
+}
+
+.mat-column-dateinit {
+  padding-right: 0px;
+  margin-right: -40px;
+}
+
+.mat-column-dateend {
+  padding-right: 0px;
+  margin-right: -40px;
+}
+
+.mat-column-user {
+  padding-right: 0px;
+  margin-right: -40px;
+}
+
+.mat-column-status {
+  padding-right: 0px;
+  margin-right: 30px;
+}

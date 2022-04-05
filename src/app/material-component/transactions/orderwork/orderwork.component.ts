@@ -14,8 +14,10 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './orderwork.component.html',
   styleUrls: ['./orderwork.component.css']
 })
-export class OrderworkComponent implements AfterViewInit {
-  displayedColumns: string[] = ['customer','orderType','initDate','endDate','mount','status','acciones'];
+export class OrderworkComponent implements AfterViewInit{
+
+  displayedColumns: string[] = ['branch','mode','reference','date','status','acciones','acciones2'];
+  data:MatTableDataSource<Orders>;
   dataWorking:MatTableDataSource<Orders>;
 
   resultsLength = 0;
@@ -25,61 +27,74 @@ export class OrderworkComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public service:OrderServices,public dialog:MatDialog) {
+  constructor(public service:OrderServices, public dialog:MatDialog) {
     this.dataWorking = new MatTableDataSource();
   }
 
- ngAfterViewInit(){
-  merge(this.sort.sortChange, this.paginator.page)
-  .pipe(
-    startWith({}),
-    switchMap(() => {
-      this.isLoadingResults = true;
-      return this.service!.getAll()
-        .pipe(catchError(() => observableOf(null)));
-    }),
-    map(data => {
-      this.isLoadingResults = false;
-      this.isRateLimitReached = data === null;
-      if (data === null) {
-        return [];
-      }
-      this.resultsLength = data.length;
-      return data;
-    })
-  ).subscribe(data =>{
-    this.dataWorking = new MatTableDataSource(data.filter(x=>x.status>100).sort((x,y)=>{
-      if(x.status>y.status){
-        return 1;
-      }
-      if(x.status<y.status){
-        return -1;
-      }
-      return 0;
-    }));
-    this.dataWorking.paginator = this.paginator;
-    this.dataWorking.sort = this.sort;
-  });
- }
-
- applyFilter(handle:Event) {
-  const filterValue = (handle.target as HTMLInputElement).value;
-  this.dataWorking.filter = filterValue.trim().toLowerCase();
-
-  if (this.dataWorking.paginator) {
-    this.dataWorking.paginator.firstPage();
+  ngAfterViewInit(){
+    this.refreshData();
   }
-}
 
- openDialog(id:number){
-  const dialogRef = this.dialog.open(ModalComponent,{
-    data:id,
-    height: '800px',
-    width: '1200px',
-  });
+  refreshData(){
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.service!.getAll()
+            .pipe(catchError(() => observableOf(null)));
+        }),
+        map(data => {
+          this.isLoadingResults = false;
+          this.isRateLimitReached = data === null;
+          if (data === null) {
+            return [];
+          }
+          this.resultsLength = data.length;
+          return data;
+        })
+      ).subscribe(data =>{
+        this.data = new MatTableDataSource(data.sort((x,y)=>{
+          if(x.statusId>y.statusId){
+            return 1;
+          }
+          if(x.statusId<y.statusId){
+            return -1;
+          }
+          return 0;
+        }));
+        this.data.paginator = this.paginator;
+        this.data.sort = this.sort;
+      });
+  }
 
-  dialogRef.afterClosed().subscribe(result=>{
-    console.log(`Dialog reult: ${result}`);
-  });
-}
+  publishOrder(orderId: number, branchId: number, divider: boolean){
+    this.service.addOrder(orderId,branchId,divider)
+    .subscribe(data =>
+    {
+      this.refreshData();
+    });
+  }
+
+  applyFilter(handle:Event) {
+    const filterValue = (handle.target as HTMLInputElement).value;
+    this.data.filter = filterValue.trim().toLowerCase();
+
+    if (this.data.paginator) {
+      this.data.paginator.firstPage();
+    }
+  }
+
+  openDialog(orderId:number,branchId:number){
+    const dialogRef = this.dialog.open(ModalComponent,{
+      data:{orderId:orderId,branchId:branchId},
+      height: '800px',
+      width: '1200px',
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`Dialog reult: ${result}`);
+    });
+  }
+
 }

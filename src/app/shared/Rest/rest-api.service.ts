@@ -7,7 +7,7 @@ import { catchError,retry } from "rxjs/operators";
   providedIn:'root'
 })
 export class RestApiService{
-  apiURL = 'https://localhost:44398';
+  apiURL = 'https://localhost:5001';
 
   constructor(private http:HttpClient){}
 
@@ -46,6 +46,14 @@ export class RestApiService{
    // HttpClient API post() method => Create T
   post<T>(url:string,body:T):Observable<T>{
     return this.http.post<T>(`${this.apiURL}${url}`,JSON.stringify(body),this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  postWithOutBody(url:string):Observable<any>{
+    return this.http.post<any>(`${this.apiURL}${url}`,null,this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

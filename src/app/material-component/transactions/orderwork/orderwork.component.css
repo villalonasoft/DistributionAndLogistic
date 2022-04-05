@@ -1,22 +1,74 @@
 table {
   width: 100%;
 }
+mat-header-cell,
+mat-cell {
+  width: 15%;
+}
 
 .mat-form-field {
   font-size: 14px;
-  width: 100%;
+  width: 15%;
 }
 
-td, th {
-  width: 25%;
+.mat-column-branch {
+  padding-right: 0px;
+  margin-right: 0px;
+  margin-left: -10px;
+}
+.mat-column-mode {
+  padding-right: 0px;
+  margin-right: -70px;
+}
+.mat-column-reference {
+  padding-right: 0px;
+  margin-right: -110px;
+}
+.mat-column-date {
+  padding-right: 0px;
+  margin-right: -70px;
+}
+.mat-column-status {
+  padding-right: 0px;
+  margin-right: 50px;
+}
+.mat-column-acciones2 {
+  padding-right: 0px;
+  margin-right: 100px;
+}
+.mat-column-acciones {
+  padding-right: 0px;
+  margin-right: -50px;
 }
 
-.mat-column-customer{
+section {
+  display: table;
+}
+
+.label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
   width: 120px;
-  padding-right: 24px;
-}
-
-.mat-column-orderType{
-  width: 10px;
-  padding-left: 24px;
 }
