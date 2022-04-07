@@ -7,6 +7,7 @@ export class Orders{
   reference:string="";
   status:string="";
   statusId:number=0;
+  warehouse:string="";
   backgroudColor:string="";
   date:Date=new Date();
   mode:string="";

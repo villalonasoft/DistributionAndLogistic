@@ -2,23 +2,29 @@ import { OrderServices } from 'src/app/shared/Rest/order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import { Orders } from 'src/app/models/orders.model';
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, SortDirection} from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { ChangeCenterDTO } from 'src/app/models/changeCenterDTO.model';
+import { Warehouse } from 'src/app/models/warehouse.model';
+import { WarehouseService } from 'src/app/shared/Rest/warehouse.service';
+import { SignalRService } from 'src/app/Services/signal-r.service';
+import * as signalR from "@aspnet/signalr";
 
 @Component({
   selector: 'app-orderwork',
   templateUrl: './orderwork.component.html',
   styleUrls: ['./orderwork.component.css']
 })
-export class OrderworkComponent implements AfterViewInit{
+export class OrderworkComponent implements AfterViewInit, OnInit{
 
-  displayedColumns: string[] = ['branch','mode','reference','date','status','acciones','acciones2'];
+  displayedColumns: string[] = ['branch','mode','reference','warehouse','date','status','acciones'];
   data:MatTableDataSource<Orders>;
   dataWorking:MatTableDataSource<Orders>;
+  warehouses:Warehouse[];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -27,8 +33,36 @@ export class OrderworkComponent implements AfterViewInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public service:OrderServices, public dialog:MatDialog) {
+  private hubConnection: signalR.HubConnection;
+
+  public startConnection = () => {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+                            .withUrl('https://localhost:5001/hubs/orders')
+                            .configureLogging(signalR.LogLevel.Information)
+                            .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('Connection started'))
+      .catch(err => console.log('Error while starting connection: ' + err))
+  }
+
+  public addTransferOrderDataListener = () => {
+    this.hubConnection.on('ListOrders', (data) => {
+      this.data = data;
+      console.log(data);
+    });
+  }
+
+  constructor(
+    public service:OrderServices,
+    public warehouseServices:WarehouseService, public dialog:MatDialog) {
     this.dataWorking = new MatTableDataSource();
+  }
+
+  ngOnInit(){
+    this.startConnection();
+    this.addTransferOrderDataListener();
   }
 
   ngAfterViewInit(){
@@ -41,6 +75,11 @@ export class OrderworkComponent implements AfterViewInit{
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
+          this.warehouseServices.getAll()
+          .pipe(catchError(() => observableOf(null)))
+          .subscribe(data=>{
+            this.warehouses = data===null?[]:data;
+          });
           return this.service!.getAll()
             .pipe(catchError(() => observableOf(null)));
         }),
@@ -70,6 +109,19 @@ export class OrderworkComponent implements AfterViewInit{
 
   publishOrder(orderId: number, branchId: number, divider: boolean){
     this.service.addOrder(orderId,branchId,divider)
+    .subscribe(data =>
+    {
+      this.refreshData();
+    });
+  }
+
+  changeCenter(orderId: number, branchId: number, warehouseId: number){
+    let update = new ChangeCenterDTO();
+    update.branchId = branchId;
+    update.orderId = orderId;
+    update.warehouseId = warehouseId;
+
+    this.service.ChangeCenter(update)
     .subscribe(data =>
     {
       this.refreshData();
