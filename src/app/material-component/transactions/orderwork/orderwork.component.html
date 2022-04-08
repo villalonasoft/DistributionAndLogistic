@@ -42,7 +42,8 @@
 
         <ng-container matColumnDef="status">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+          <mat-cell mat-cell [style.background-color]="'#'+element.backgroudColor" *matCellDef="let element">
+            {{element.status}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="reference">
@@ -51,7 +52,7 @@
         </ng-container>
 
         <ng-container matColumnDef="acciones">
-          <mat-header-cell mat-header-cell *matHeaderCellDef>OPCIONES</mat-header-cell>
+          <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell mat-cell *matCellDef="let element">
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu Order">
               <mat-icon>more</mat-icon>
@@ -89,8 +90,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row matRipple [style.background-color]="'#'+row.backgroudColor"
-          *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
         </tr>

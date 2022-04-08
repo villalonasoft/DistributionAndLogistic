@@ -1,6 +1,7 @@
 table {
   width: 100%;
 }
+
 mat-header-cell,
 mat-cell {
   width: 15%;
@@ -8,7 +9,7 @@ mat-cell {
 
 .mat-form-field {
   font-size: 14px;
-  width: 15%;
+  width: 40%;
 }
 
 .mat-column-branch {
@@ -29,16 +30,15 @@ mat-cell {
   margin-right: -70px;
 }
 .mat-column-status {
+  padding: 5px 15px;
+}
+.mat-column-color {
   padding-right: 0px;
   margin-right: 50px;
 }
-.mat-column-acciones2 {
-  padding-right: 0px;
-  margin-right: 100px;
-}
 .mat-column-acciones {
   padding-right: 0px;
-  margin-right: -50px;
+  margin-right: -100px;
 }
 
 section {

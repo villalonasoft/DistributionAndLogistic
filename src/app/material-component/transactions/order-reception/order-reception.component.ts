@@ -8,13 +8,14 @@ import { catchError,map, switchMap,startWith } from 'rxjs/operators';
 import { OrdersHeaders } from 'src/app/models/ordersHeaders.model';
 import { OrderServices } from 'src/app/shared/Rest/order.service';
 import { ModalHeaderComponent } from './modal/modal-header.component';
+import * as signalR from "@aspnet/signalr";
 
 @Component({
   selector: 'app-order-reception',
   templateUrl: './order-reception.component.html',
   styleUrls: ['./order-reception.component.css']
 })
-export class OrderReceptionComponent implements AfterViewInit {
+export class OrderReceptionComponent implements AfterViewInit, OnInit {
 
   displayedColumns: string[] = ['branch','mode','zones','dateinit','dateend','user','status','acciones'];
   data:MatTableDataSource<OrdersHeaders>;
@@ -27,8 +28,33 @@ export class OrderReceptionComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator:MatPaginator;
   @ViewChild(MatSort) sort:MatSort;
 
+  private hubConnection: signalR.HubConnection;
+
+  public startConnection = () => {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+                            .withUrl('https://localhost:5001/hubs/headers')
+                            .configureLogging(signalR.LogLevel.Information)
+                            .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('Connection started'))
+      .catch(err => console.log('Error while starting connection: ' + err))
+  }
+
+  public addTransferOrderDataListener = () => {
+    this.hubConnection.on('ListHeaders', (data) => {
+      this.data = data;
+    });
+  }
+
   constructor(public service:OrderServices,public dialog:MatDialog) {
     this.dataWorking = new MatTableDataSource();
+  }
+
+  ngOnInit(){
+    this.startConnection();
+    this.addTransferOrderDataListener();
   }
 
   ngAfterViewInit(){

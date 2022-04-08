@@ -11,7 +11,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ChangeCenterDTO } from 'src/app/models/changeCenterDTO.model';
 import { Warehouse } from 'src/app/models/warehouse.model';
 import { WarehouseService } from 'src/app/shared/Rest/warehouse.service';
-import { SignalRService } from 'src/app/Services/signal-r.service';
 import * as signalR from "@aspnet/signalr";
 
 @Component({
@@ -49,9 +48,39 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
 
   public addTransferOrderDataListener = () => {
     this.hubConnection.on('ListOrders', (data) => {
-      this.data = data;
-      console.log(data);
+      let result = this.data.data;
+
+      var findS = result.find(element=>element.orderId == data.orderId && element.branchId== data.branchId && element.reference==data.reference)??null;
+      if(findS==null && data.orderId>0){
+        result.push({...data});
+        this.wSRefreshData(result);
+      }
+      else if(data.orderId>0){
+        result.map(obj =>{
+          if(obj.orderId == data.orderId && obj.branchId== data.branchId && obj.reference==data.reference)
+          {
+            obj.backgroudColor = data.backgroudColor,
+            obj.status = data.status,
+            obj.statusId = data.statusId,
+            obj.warehouse = data.warehouse
+          }
+          return obj;
+        });
+        this.wSRefreshData(result);
+      }
     });
+  }
+
+  wSRefreshData(result:Orders[]){
+    this.data = new MatTableDataSource(result.sort((x,y)=>{
+      if(x.statusId>y.statusId  && x.reference > y.reference){
+        return 1;
+      }
+      if(x.statusId<y.statusId  && x.reference < y.reference){
+        return -1;
+      }
+      return 0;
+    }));
   }
 
   constructor(
@@ -94,10 +123,10 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
         })
       ).subscribe(data =>{
         this.data = new MatTableDataSource(data.sort((x,y)=>{
-          if(x.statusId>y.statusId){
+          if(x.statusId>y.statusId  && x.reference > y.reference){
             return 1;
           }
-          if(x.statusId<y.statusId){
+          if(x.statusId<y.statusId  && x.reference < y.reference){
             return -1;
           }
           return 0;
@@ -111,7 +140,7 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
     this.service.addOrder(orderId,branchId,divider)
     .subscribe(data =>
     {
-      this.refreshData();
+      //this.refreshData();
     });
   }
 
