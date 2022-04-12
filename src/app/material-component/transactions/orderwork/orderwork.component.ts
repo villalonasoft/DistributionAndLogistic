@@ -73,11 +73,11 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
 
   wSRefreshData(result:Orders[]){
     this.data = new MatTableDataSource(result.sort((x,y)=>{
-      if(x.statusId>y.statusId  && x.reference > y.reference){
-        return 1;
-      }
-      if(x.statusId<y.statusId  && x.reference < y.reference){
+      if(Number(x.canOrder) > Number(y.canOrder)){
         return -1;
+      }
+      if(Number(x.canOrder) < Number(y.canOrder)){
+        return 1;
       }
       return 0;
     }));
@@ -123,10 +123,10 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
         })
       ).subscribe(data =>{
         this.data = new MatTableDataSource(data.sort((x,y)=>{
-          if(x.statusId>y.statusId  && x.reference > y.reference){
+          if(Number(x.canOrder) < Number(y.canOrder)){
             return 1;
           }
-          if(x.statusId<y.statusId  && x.reference < y.reference){
+          if(Number(x.canOrder) > Number(y.canOrder)){
             return -1;
           }
           return 0;
@@ -137,6 +137,7 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
   }
 
   publishOrder(orderId: number, branchId: number, divider: boolean){
+
     this.service.addOrder(orderId,branchId,divider)
     .subscribe(data =>
     {

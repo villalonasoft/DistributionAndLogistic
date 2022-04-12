@@ -19,7 +19,7 @@
     </div>
 
     <div class="mat-elevation-z4">
-      <mat-table [dataSource]="data" matSort matSortActive="date" matSortDisableClear matSortDirection="desc">
+      <mat-table [dataSource]="data" matSort>
         <ng-container matColumnDef="branch">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</mat-header-cell>
           <mat-cell mat-cell *matCellDef="let element"> {{element.branchName}} </mat-cell>
@@ -27,7 +27,7 @@
 
         <ng-container matColumnDef="mode">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Modo</mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let element"> {{element.mode}} </mat-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.mode}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="warehouse">
@@ -71,16 +71,49 @@
                   <span>{{warehouse.name}}</span>
                 </button>
               </mat-menu>
-              <button mat-menu-item (click)="publishOrder(element.orderId,element.branchId,true)"
+              <!-- cant schedule -->
+              <button *ngIf="!element.canOrder" mat-menu-item [swal]="{
+                  title: 'Sucursal esta fuera de fecha',
+                  text:'A esta sucursal no se le trabajan pedidos este dia, Desea continuar?',
+                  icon:'question',
+                  focusCancel:true,
+                  showCancelButton: true }" (confirm)="publishOrder(element.orderId,element.branchId,true)"
                 [disabled]="element.statusId==100?false:true">
                 <mat-icon>transform</mat-icon>
                 <span>Descargar Dividido</span>
               </button>
-              <button mat-menu-item (click)="publishOrder(element.orderId,element.branchId,false)"
+              <button *ngIf="!element.canOrder" mat-menu-item [swal]="{
+                title: 'Sucursal esta fuera de fecha',
+                text:'A esta sucursal no se le trabajan pedidos este dia, Desea continuar?',
+                icon:'question',
+                focusCancel:true,
+                showCancelButton: true }" (confirm)="publishOrder(element.orderId,element.branchId,false)"
                 [disabled]="element.statusId==100?false:true">
                 <mat-icon>fullscreen</mat-icon>
                 <span>Descargar Completo</span>
               </button>
+              <!-- can schedule -->
+              <button *ngIf="element.canOrder" mat-menu-item [swal]="{
+                title: 'Descargar pedido dividido',
+                text:'Desea contiuar?',
+                icon:'question',
+                focusCancel:true,
+                showCancelButton: true }" (confirm)="publishOrder(element.orderId,element.branchId,true)"
+                [disabled]="element.statusId==100?false:true">
+                <mat-icon>transform</mat-icon>
+                <span>Descargar Dividido</span>
+              </button>
+              <button *ngIf="element.canOrder" mat-menu-item [swal]="{
+                title: 'Descargar pedido Completo',
+                text:'Desea contiuar?',
+                icon:'question',
+                focusCancel:true,
+                showCancelButton: true }" (confirm)="publishOrder(element.orderId,element.branchId,false)"
+                [disabled]="element.statusId==100?false:true">
+                <mat-icon>fullscreen</mat-icon>
+                <span>Descargar Completo</span>
+              </button>
+
               <button mat-menu-item (click)="openDialog(element.orderId,element.branchId)">
                 <mat-icon>view_comfy</mat-icon>
                 <span>Ver Detalle</span>
@@ -90,13 +123,13 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row matRipple [style.background-color]="!row.canOrder?'#FF7F7F':''"
+          *matRowDef="let row; columns: displayedColumns;"></mat-row>
         <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          <td class="mat-cell" colspan="4">No hay informacion que coincida con el filtro "{{input.value}}"</td>
         </tr>
-
       </mat-table>
-      <mat-paginator [pageSizeOptions]="[25, 100]" showFirstLastButtons aria-label="Select page of users">
+      <mat-paginator [pageSizeOptions]="[25, 100]" showFirstLastButtons aria-label="Pagina Seleccionada">
       </mat-paginator>
     </div>
   </mat-card-content>

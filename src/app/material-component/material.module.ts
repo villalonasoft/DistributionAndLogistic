@@ -18,10 +18,13 @@ import { ModalComponent } from './transactions/orderwork/modal/modal.component';
 import { ModalHeaderComponent } from './transactions/order-reception/modal/modal-header.component';
 import { DashboarComponent } from './dashboar/dashboar.component';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(MaterialRoutes),
+    SweetAlert2Module.forRoot(),
     DemoMaterialModule,
     HttpClientModule,
     FormsModule,

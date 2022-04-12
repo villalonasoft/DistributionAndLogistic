@@ -10,6 +10,7 @@ export class Orders{
   warehouse:string="";
   backgroudColor:string="";
   date:Date=new Date();
+  canOrder:boolean=false;
   mode:string="";
   detail:OrderDetail[]= new Array()
 }
