@@ -12,6 +12,7 @@ import { ChangeCenterDTO } from 'src/app/models/changeCenterDTO.model';
 import { Warehouse } from 'src/app/models/warehouse.model';
 import { WarehouseService } from 'src/app/shared/Rest/warehouse.service';
 import * as signalR from "@aspnet/signalr";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-orderwork',
@@ -36,8 +37,8 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl('https://localhost:5001/hubs/orders')
-                            .configureLogging(signalR.LogLevel.Information)
+                            .withUrl(environment.HUB+'/orders')
+                            .configureLogging(signalR.LogLevel.Trace)
                             .build();
 
     this.hubConnection

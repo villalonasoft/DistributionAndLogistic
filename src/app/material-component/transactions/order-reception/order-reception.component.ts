@@ -9,6 +9,7 @@ import { OrdersHeaders } from 'src/app/models/ordersHeaders.model';
 import { OrderServices } from 'src/app/shared/Rest/order.service';
 import { ModalHeaderComponent } from './modal/modal-header.component';
 import * as signalR from "@aspnet/signalr";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-order-reception',
@@ -32,7 +33,7 @@ export class OrderReceptionComponent implements AfterViewInit, OnInit {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl('https://localhost:5001/hubs/headers')
+                            .withUrl(environment.HUB+'/headers')
                             .configureLogging(signalR.LogLevel.Information)
                             .build();
 

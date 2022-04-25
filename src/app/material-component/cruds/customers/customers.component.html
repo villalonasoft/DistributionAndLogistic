@@ -1,0 +1,70 @@
+<mat-card class="Mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Usuarios</mat-card-title>
+    <mat-card-subtitle>En esta ventada podra Ver, crear y editar Usuarios</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" [style]="{width:'100%'}">
+      <input type="hidden" name="id" [value]="branchServices.form.id">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="branchServices.form.name" name="name" required>
+      </mat-form-field>
+      <table class="full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>API KEY</mat-label>
+              <input matInput [(ngModel)]="branchServices.form.apiKey" name="apikey" required disabled>
+              <button mat-icon-button type="button" matSuffix (click)="changeKey()">
+                <mat-icon>refresh</mat-icon>
+              </button>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <div class="checks">
+
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.monday" name="monday">Lunes
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.tuesday" name="tuesday">Martes
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.wednesday" name="wednesday">Miercoles
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.thursday" name="thursday">Jueves
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.friday" name="friday">Viernes
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.saturday" name="saturday">Sabado
+          </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox [(ngModel)]="branchServices.form.sunday" name="sunday">Domingo
+          </mat-checkbox>
+        </p>
+      </div>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+      <button mat-flat-button color="primary" type="button" (click)="resetForm(form)">Cancelar</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card class="Mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Usuarios</mat-card-title>
+    <mat-card-subtitle>En esta ventada podra Ver, crear y editar Usuarios</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <app-customer-detail [style]="{width:'100%'}"></app-customer-detail>
+  </mat-card-content>
+</mat-card>

@@ -19,6 +19,10 @@ import { ModalHeaderComponent } from './transactions/order-reception/modal/modal
 import { DashboarComponent } from './dashboar/dashboar.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { UserComponent } from './cruds/user/user.component';
+import { DetailComponent } from './cruds/user/detail/detail.component';
+import { CustomersComponent } from './cruds/customers/customers.component';
+import { CustomerDetailComponent } from './cruds/customers/customer-detail/customer-detail.component';
 
 @NgModule({
   imports: [
@@ -39,6 +43,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     OrderworkComponent,
     OrderReceptionComponent,
     DashboarComponent,
+    UserComponent,
+    DetailComponent,
+    CustomersComponent,
+    CustomerDetailComponent,
   ]
 })
 export class MaterialComponentsModule {}

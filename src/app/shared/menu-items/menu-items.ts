@@ -15,8 +15,8 @@ const MENUITEMS = [
   {
     name:"Entrada De Datos",
     submenu:[
-      // { state: 'presentation',type: 'link', name: 'Presentaciones',  icon: 'av_timer'},
-      // { state: 'product', type: 'link', name: 'Productos', icon: 'crop_7_5'},
+      { state: 'user',type: 'link', name: 'Usuarios',  icon: 'person'},
+      { state: 'customer', type: 'link', name: 'Clientes', icon: 'store'},
       // { state: 'customer', type: 'link', name: 'Clientes', icon: 'view_comfy'},
       // { state: 'pickers', type: 'link', name: 'Pickers', icon: 'view_list'},
       // { state: 'units', type: 'link', name: 'Unidades', icon: 'view_headline'},

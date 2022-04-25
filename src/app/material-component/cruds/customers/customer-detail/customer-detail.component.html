@@ -1,0 +1,44 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>Api Key</th>
+      <th>Lunes</th>
+      <th>Martes</th>
+      <th>Miercoles</th>
+      <th>Jueves</th>
+      <th>Viernes</th>
+      <th>Sabado</th>
+      <th>Domingo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pd of branchService.list">
+      <td (click)="populateForm(pd)">{{pd.id}}</td>
+      <td (click)="populateForm(pd)">{{pd.name}}</td>
+      <td>{{pd.apiKey.split('-')[4]}}</td>
+      <td>
+        <mat-icon>{{pd.monday?'check':'close'}}</mat-icon>
+      </td>
+      <td>
+        <mat-icon>{{pd.tuesday?'check':'close'}}</mat-icon>
+      </td>
+      <td>
+        <mat-icon>{{pd.wednesday?'check':'close'}}</mat-icon>
+      </td>
+      <td>
+        <mat-icon>{{pd.thursday?'check':'close'}}</mat-icon>
+      </td>
+      <td>
+        <mat-icon>{{pd.friday?'check':'close'}}</mat-icon>
+      </td>
+      <td>
+        <mat-icon>{{pd.saturday?'check':'close'}}</mat-icon>
+      </td>
+      <td>
+        <mat-icon>{{pd.sunday?'check':'close'}}</mat-icon>
+      </td>
+    </tr>
+  </tbody>
+</table>

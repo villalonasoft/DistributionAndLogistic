@@ -1,0 +1,20 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>Usuario</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pd of userService.list">
+      <td (click)="populateForm(pd)">{{pd.id}}</td>
+      <td (click)="populateForm(pd)">{{pd.name}}</td>
+      <td (click)="populateForm(pd)">{{pd.userName}}</td>
+      <td (click)="populateForm(pd)">
+        <mat-icon>{{pd.status?'check':'close'}}</mat-icon>
+      </td>
+    </tr>
+  </tbody>
+</table>
