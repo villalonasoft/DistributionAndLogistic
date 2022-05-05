@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  API:'http://localhost:5000/',
-  HUB:'http://localhost:5000/hubs'
+  API:'http://localhost:8080/',
+  HUB:'http://localhost:8080/hubs'
 };

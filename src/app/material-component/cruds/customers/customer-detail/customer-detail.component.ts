@@ -9,7 +9,9 @@ import { BranchService } from 'src/app/shared/Rest/branch.service';
 })
 export class CustomerDetailComponent implements OnInit {
 
-  constructor(public branchService:BranchService) { }
+  constructor(
+    public branchService:BranchService
+    ) { }
 
   ngOnInit(): void {
     this.branchService.get();
