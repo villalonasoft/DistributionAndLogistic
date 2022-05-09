@@ -1,4 +1,7 @@
+import { WarehouseZone } from "./warehouseZone.model";
+
 export class Warehouse{
-  id:Number=0;
+  id:number=0;
   name: string="";
+  zones:WarehouseZone[];
 }

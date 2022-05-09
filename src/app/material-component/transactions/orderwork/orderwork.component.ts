@@ -105,10 +105,8 @@ export class OrderworkComponent implements AfterViewInit, OnInit{
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          this.warehouseServices.getAll()
-          .pipe(catchError(() => observableOf(null)))
-          .subscribe(data=>{
-            this.warehouses = data===null?[]:data;
+          this.warehouseServices.getAll().then(()=>{
+            this.warehouses = this.warehouseServices.list;
           });
           return this.service!.getAll()
             .pipe(catchError(() => observableOf(null)));

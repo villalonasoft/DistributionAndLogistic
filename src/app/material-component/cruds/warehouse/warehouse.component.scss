@@ -1,0 +1,35 @@
+.box{
+  display: flex;
+}
+.box .form{
+  margin-right: 150px;
+  width: fit-content;
+}
+.box .table{
+  scroll-behavior: auto;
+}
+.mat-form-field {
+  width: auto;
+}
+
+.formlocation{
+  display: flex;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+button {
+  margin-right: 8px;
+}

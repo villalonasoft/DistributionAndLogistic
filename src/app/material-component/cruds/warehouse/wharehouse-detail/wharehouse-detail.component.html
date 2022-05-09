@@ -1,0 +1,14 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pd of warehouseService.list">
+      <td (click)="populateForm(pd)">{{pd.id}}</td>
+      <td (click)="populateForm(pd)">{{pd.name}}</td>
+    </tr>
+  </tbody>
+</table>

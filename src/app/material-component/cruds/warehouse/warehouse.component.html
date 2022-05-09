@@ -1,0 +1,99 @@
+<mat-card class="Mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Almacen</mat-card-title>
+    <mat-card-subtitle>En esta ventada podra Ver, crear y editar Almacenes</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="box">
+      <div class="form">
+        <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" [style]="{width:'100%'}">
+          <input type="hidden" name="id" [value]="warehouseService.form.id">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Nombre Del Almacen</mat-label>
+            <input matInput [(ngModel)]="warehouseService.form.name" name="name" required>
+          </mat-form-field>
+          <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+          <button mat-flat-button color="primary" type="button" (click)="resetForm(form)">Limpiar</button>
+        </form>
+      </div>
+      <div class="table">
+        <app-wharehouse-detail></app-wharehouse-detail>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="Mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Ubicaciones</mat-card-title>
+    <mat-card-subtitle>En esta ventada podra Ver, crear y editar Las ubicaciones de los almacenes</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="formlocation">
+      <form novalidate autocomplete="off" #form2="ngForm">
+        <input name="codigo" type="hidden" [value]="warehouseService.form2.id">
+        <input name="warehouseId" type="hidden" [value]="warehouseService.form2.warehouseId">
+        <table>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput [(ngModel)]="warehouseService.form2.name" name="name" required appearance="fill">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Primer Pasillo</mat-label>
+              <input type="number" matInput [(ngModel)]="warehouseService.form2.initPasillo" name="initPasillo" required
+                appearance="fill" min="0">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Ultimo Pasillo</mat-label>
+              <input type="number" matInput [(ngModel)]="warehouseService.form2.finPasillo" name="finPasillo" required
+                appearance="fill" min="{{warehouseService.form2.initPasillo}}">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Primer Tramo</mat-label>
+              <input type="number" matInput [(ngModel)]="warehouseService.form2.initTramo" name="initTramo" required
+                appearance="fill" min="0">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Ultimo Tramo</mat-label>
+              <input type="number" matInput [(ngModel)]="warehouseService.form2.finTramo" name="finTramo" required
+                appearance="fill" min="{{warehouseService.form2.initTramo}}">
+            </mat-form-field>
+          </td>
+        </table>
+      </form>
+      <button mat-flat-button color="primary" type="button" [disabled]="warehouseService.form2.id>0 || form2.invalid"
+        (click)="addLocation(form2)">Agregar</button>
+      <button mat-flat-button color="primary" type="button" (click)="resetForm2(form2)">Limpiar</button>
+    </div>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Codigo</th>
+          <th>Nombre</th>
+          <th>Pasillo Inicial</th>
+          <th>Tramo Inicial</th>
+          <th>Pasillo Final</th>
+          <th>Tramo Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pd of warehouseService.form.zones">
+          <td (click)="populateForm2(pd)">{{pd.id}}</td>
+          <td (click)="populateForm2(pd)">{{pd.name}}</td>
+          <td (click)="populateForm2(pd)">{{pd.initPasillo}}</td>
+          <td (click)="populateForm2(pd)">{{pd.initTramo}}</td>
+          <td (click)="populateForm2(pd)">{{pd.finPasillo}}</td>
+          <td (click)="populateForm2(pd)">{{pd.finTramo}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>

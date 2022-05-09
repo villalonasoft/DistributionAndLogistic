@@ -23,6 +23,8 @@ import { UserComponent } from './cruds/user/user.component';
 import { DetailComponent } from './cruds/user/detail/detail.component';
 import { CustomersComponent } from './cruds/customers/customers.component';
 import { CustomerDetailComponent } from './cruds/customers/customer-detail/customer-detail.component';
+import { WarehouseComponent } from './cruds/warehouse/warehouse.component';
+import { WharehouseDetailComponent } from './cruds/warehouse/wharehouse-detail/wharehouse-detail.component';
 
 @NgModule({
   imports: [
@@ -47,6 +49,8 @@ import { CustomerDetailComponent } from './cruds/customers/customer-detail/custo
     DetailComponent,
     CustomersComponent,
     CustomerDetailComponent,
+    WarehouseComponent,
+    WharehouseDetailComponent,
   ]
 })
 export class MaterialComponentsModule {}
