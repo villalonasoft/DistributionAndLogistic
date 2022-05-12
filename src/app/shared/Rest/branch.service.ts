@@ -5,8 +5,6 @@ import { throwError } from 'rxjs';
 import { BaseService } from './base.service';
 import { catchError, retry } from 'rxjs/operators';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

@@ -40,28 +40,28 @@
             </mat-form-field>
           </td>
           <td>
-            <mat-form-field class="full-width">
+            <mat-form-field class="number">
               <mat-label>Primer Pasillo</mat-label>
               <input type="number" matInput [(ngModel)]="warehouseService.form2.initPasillo" name="initPasillo" required
                 appearance="fill" min="0">
             </mat-form-field>
           </td>
           <td>
-            <mat-form-field class="full-width">
+            <mat-form-field class="number">
               <mat-label>Ultimo Pasillo</mat-label>
               <input type="number" matInput [(ngModel)]="warehouseService.form2.finPasillo" name="finPasillo" required
                 appearance="fill" min="{{warehouseService.form2.initPasillo}}">
             </mat-form-field>
           </td>
           <td>
-            <mat-form-field class="full-width">
+            <mat-form-field class="number">
               <mat-label>Primer Tramo</mat-label>
               <input type="number" matInput [(ngModel)]="warehouseService.form2.initTramo" name="initTramo" required
                 appearance="fill" min="0">
             </mat-form-field>
           </td>
           <td>
-            <mat-form-field class="full-width">
+            <mat-form-field class="number">
               <mat-label>Ultimo Tramo</mat-label>
               <input type="number" matInput [(ngModel)]="warehouseService.form2.finTramo" name="finTramo" required
                 appearance="fill" min="{{warehouseService.form2.initTramo}}">
@@ -69,9 +69,11 @@
           </td>
         </table>
       </form>
-      <button mat-flat-button color="primary" type="button" [disabled]="warehouseService.form2.id>0 || form2.invalid"
-        (click)="addLocation(form2)">Agregar</button>
-      <button mat-flat-button color="primary" type="button" (click)="resetForm2(form2)">Limpiar</button>
+      <div class="full-width">
+        <button mat-flat-button color="primary" type="button" [disabled]="warehouseService.form2.id>0 || form2.invalid"
+          (click)="addLocation(form2)">Agregar</button>
+        <button mat-flat-button color="primary" type="button" (click)="resetForm2(form2)">Limpiar</button>
+      </div>
     </div>
     <table class="table">
       <thead class="thead-light">

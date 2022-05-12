@@ -18,7 +18,7 @@ const MENUITEMS = [
       { state: 'user',type: 'link', name: 'Usuarios',  icon: 'person'},
       { state: 'customer', type: 'link', name: 'Clientes', icon: 'store'},
       { state: 'warehouse', type: 'link', name: 'Almacenes', icon: 'view_comfy'},
-      // { state: 'pickers', type: 'link', name: 'Pickers', icon: 'view_list'},
+      { state: 'unit', type: 'link', name: 'Unidades', icon: 'view_list'},
       // { state: 'units', type: 'link', name: 'Unidades', icon: 'view_headline'},
       // { state: 'taxes', type: 'link', name: 'Impuestos', icon: 'tab'},
       // { state: 'supplier', type: 'link', name: 'Supplidores', icon: 'web'},

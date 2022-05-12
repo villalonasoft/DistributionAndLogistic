@@ -4,8 +4,8 @@
     <mat-card-subtitle>En esta ventada podra Ver, crear y editar Usuarios</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile>
+    <div class="box">
+      <div class="form">
         <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)" [style]="{width:'100%'}">
           <input type="hidden" name="id" [value]="userService.formData.id">
           <mat-form-field class="full-width" appearance="fill">
@@ -57,10 +57,10 @@
           <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
           <button mat-flat-button color="primary" type="button" (click)="resetForm(form)">Cancelar</button>
         </form>
-      </mat-grid-tile>
-      <mat-grid-tile>
+      </div>
+      <div class="detail">
         <app-detail [style]="{width:'100%'}"></app-detail>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>

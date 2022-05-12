@@ -5,6 +5,7 @@ import { DashboarComponent } from './dashboar/dashboar.component';
 import { UserComponent } from './cruds/user/user.component';
 import { CustomersComponent } from './cruds/customers/customers.component';
 import { WarehouseComponent } from './cruds/warehouse/warehouse.component';
+import { UnitComponent } from './cruds/unit/unit.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -30,5 +31,9 @@ export const MaterialRoutes: Routes = [
   {
     path:'warehouse',
     component:WarehouseComponent
+  },
+  {
+    path:'unit',
+    component:UnitComponent
   }
 ];

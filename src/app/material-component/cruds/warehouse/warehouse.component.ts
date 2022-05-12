@@ -11,7 +11,6 @@ import { WarehouseService } from 'src/app/shared/Rest/warehouse.service';
   styleUrls: ['./warehouse.component.scss']
 })
 export class WarehouseComponent implements OnInit {
-
   warehouseService:WarehouseService;
   constructor(_warehouseService:WarehouseService, private _snackBar:MatSnackBar) {
     this.warehouseService = _warehouseService;

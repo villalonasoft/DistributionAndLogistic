@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>UNIDADES</mat-card-title>
+    <mat-card-subtitle>Lista de unidades</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="full-width">
+      <input #id name="id" [(ngModel)]="form.id" hidden>
+      <mat-label>Nombre</mat-label>
+      <input matInput #unit name="name" required appearance="fill" [(ngModel)]="form.description" form.id
+        (keydown.enter)="createUpdate()">
+    </mat-form-field>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Codigo</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pd of unitService.list">
+          <td (click)="populateForm(pd)">{{pd.id}}</td>
+          <td (click)="populateForm(pd)">{{pd.description}}</td>
+          <td (click)="populateForm(pd)">{{pd.description.substring(0,3)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
