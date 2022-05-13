@@ -26,6 +26,7 @@ import { CustomerDetailComponent } from './cruds/customers/customer-detail/custo
 import { WarehouseComponent } from './cruds/warehouse/warehouse.component';
 import { WharehouseDetailComponent } from './cruds/warehouse/wharehouse-detail/wharehouse-detail.component';
 import { UnitComponent } from './cruds/unit/unit.component';
+import { ModeComponent } from './cruds/mode/mode.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { UnitComponent } from './cruds/unit/unit.component';
     WarehouseComponent,
     WharehouseDetailComponent,
     UnitComponent,
+    ModeComponent,
   ]
 })
-export class MaterialComponentsModule {}
+export class MaterialComponentsModule { }

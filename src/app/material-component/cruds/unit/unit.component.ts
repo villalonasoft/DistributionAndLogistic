@@ -9,41 +9,73 @@ import { UnitService } from 'src/app/shared/Rest/unit.service';
   styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
-  form:Unit=new Unit();
-  unitService:UnitService;
-  constructor(_unitService:UnitService,private _snackBar:MatSnackBar) {
-    this.unitService=_unitService;
+  form: Unit = new Unit();
+  unitService: UnitService;
+
+  constructor(_unitService: UnitService, private _snackBar: MatSnackBar) {
+    this.unitService = _unitService;
   }
 
   ngOnInit(): void {
-    this.unitService.refreshList();
+    this.refreshList();
   }
 
-  async createUpdate(){
-    if(this.form.id==0){
-      await this.save(this.form.description);
-    }
-    else{
-      await this.update(this.form.id,this.form.description)
-    }
-    this.form = new Unit();
-  }
-
-  populateForm(selectedRecord:Unit){
+  populateForm(selectedRecord: Unit) {
     this.form.id = selectedRecord.id;
     this.form.description = selectedRecord.description;
   }
 
-  private async save(value:string){
-    let newUnit = new Unit();
-    newUnit.description = value;
-    await this.unitService.addUnit(newUnit);
+  async createUpdate() {
+    this.form.id == 0 ? await this.addUnit(this.form) : await this.updateUnit(this.form);
   }
 
-  private async update(id:number,value:string){
-    let newUnit = new Unit();
-    newUnit.id = id;
-    newUnit.description = value;
-    await this.unitService.updateUnit(newUnit);
+  //#region  HttpMethod
+  async refreshList() {
+    await this.unitService.get().then((res) => {
+      if (res.error == null) {
+        this.unitService.list = res.data;
+      }
+      else {
+        this._snackBar.open(`Codigo:${res.error.error} Mensaje:${res.error.message}`, 'Undo', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 10000 });
+      }
+    }).catch((err) => {
+      this._snackBar.open(err, 'Undo', { horizontalPosition: 'center', verticalPosition: 'top', duration: 10000 });
+    });
   }
+
+  async addUnit(unit: Unit) {
+    await this.unitService.post(unit).then((res) => {
+      if (res.error == null) {
+        this.unitService.list.push({ ...res.data });
+        this.form = new Unit();
+      }
+      else {
+        this._snackBar.open(`Codigo:${res.error.error} Mensaje:${res.error.message}`, 'Undo', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 10000 });
+      }
+    }).catch((err) => {
+      this._snackBar.open(err, 'Undo', { horizontalPosition: 'center', verticalPosition: 'top', duration: 10000 });
+    });
+  }
+
+  async updateUnit(unit: Unit) {
+    await this.unitService.update(unit.id, unit)
+      .then((res) => {
+        if (res.error == null) {
+          this.unitService.list.map(obj => {
+            if (obj.id == unit.id) {
+              obj.description = unit.description;
+            }
+            return obj;
+          });
+          this.form = new Unit();
+        }
+        else {
+          this._snackBar.open(`Codigo:${res.error.error} Mensaje:${res.error.message}`, 'Undo', { horizontalPosition: 'center', verticalPosition: 'bottom', duration: 10000 });
+        }
+      })
+      .catch((err) => {
+        this._snackBar.open(err, 'Undo', { horizontalPosition: 'center', verticalPosition: 'top', duration: 10000 });
+      });
+  }
+  //#endregion
 }

@@ -1,4 +1,4 @@
-import { Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 import { RestApiService } from './rest-api.service';
 import { Orders } from "src/app/models/orders.model";
 import { Observable } from "rxjs";
@@ -7,44 +7,45 @@ import { ChangeCenterDTO } from "src/app/models/changeCenterDTO.model";
 import { BaseService } from "./base.service";
 import { HttpClient } from "@angular/common/http";
 import { catchError, retry } from "rxjs/operators";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderServices extends BaseService{
-  private header:string = "";
-  constructor(http:HttpClient){
+export class OrderServices extends BaseService {
+  private header: string = "";
+  constructor(http: HttpClient) {
     super(http);
-    this.header = this.apiUrl+'api/headers/';
-    this.apiUrl+= 'api/orders/';
+    this.header = this.apiUrl + 'api/headers/';
+    this.apiUrl += 'api/orders/';
   }
 
-  getAll():Observable<Orders[]>{
+  getAll(): Observable<Orders[]> {
     return this.http.get<Orders[]>(this.apiUrl);
   }
 
-  getOrderById(orderId:number,branchId:number):Observable<Orders>{
+  getOrderById(orderId: number, branchId: number): Observable<Orders> {
     return this.http.get<Orders>(`${this.apiUrl}${orderId}/branch/${branchId}`);
   }
 
-  getAllHeaders():Observable<OrdersHeaders[]>{
+  getAllHeaders(): Observable<OrdersHeaders[]> {
     return this.http.get<OrdersHeaders[]>(`${this.header}`);
   }
 
-  getHeaderById(orderId:number,branchId:number,zoneId:number):Observable<OrdersHeaders>{
+  getHeaderById(orderId: number, branchId: number, zoneId: number): Observable<OrdersHeaders> {
     return this.http.get<OrdersHeaders>(`${this.apiUrl}${orderId}/branch/${branchId}/zone/${zoneId}`);
   }
 
-  addOrder(orderId:number,branchId:number,divider:boolean):Observable<boolean>{
-    return this.http.post<any>(`${this.apiUrl}${orderId}/branch/${branchId}?divider=${divider}`,null,this.httpOptions)
+  addOrder(orderId: number, branchId: number, divider: boolean): Observable<boolean> {
+    return this.http.post<any>(`${this.apiUrl}${orderId}/branch/${branchId}?divider=${divider}`, null, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
-  ChangeCenter(updateOrder:ChangeCenterDTO):Observable<boolean>{
-    return this.http.put<boolean>(`${this.apiUrl}changecenter`,updateOrder);
+  ChangeCenter(updateOrder: ChangeCenterDTO): Observable<boolean> {
+    return this.http.put<boolean>(`${this.apiUrl}changecenter`, updateOrder);
   };
 }

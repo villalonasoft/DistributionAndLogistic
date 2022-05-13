@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    if (await this.authService.checkAuthenticated()) {
-      await this.router.navigate([this.returnUrl]);
-    }
+    // if (await this.authService.checkAuthenticated()) {
+    //  await this.router.navigate([this.returnUrl]);
+    // }
   }
 
   async onSubmit(): Promise<void> {
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       try {
         const username = this.form.get('username')?.value;
         const password = this.form.get('password')?.value;
-        await this.authService.login(username, password);
+        // await this.authService.login(username, password);
       } catch (err) {
         this.loginInvalid = true;
       }

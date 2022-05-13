@@ -15,8 +15,8 @@ interface Areas {
 })
 export class LockscreenComponent implements OnInit {
   areas: Areas[] = [
-    {value: '/', viewValue: 'administrativo'},
-    {value: 'app', viewValue: 'cliente'},
+    { value: '/', viewValue: 'administrativo' },
+    { value: 'app', viewValue: 'cliente' },
   ];
 
   form: FormGroup;
@@ -30,35 +30,35 @@ export class LockscreenComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService) {
-      this.returnUrl = this.route.snapshot.queryParams.returnUrl || 'app/realtime';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || 'app/realtime';
 
     this.form = this.fb.group({
       username: ['', Validators.email],
       password: ['', Validators.required],
-      area:['',Validators.required]
+      area: ['', Validators.required]
     });
-    }
+  }
 
-    async ngOnInit(): Promise<void> {
-      if (await this.authService.checkAuthenticated()) {
-        await this.router.navigate([this.returnUrl]);
-      }
-    }
+  async ngOnInit(): Promise<void> {
+    // if (await this.authService.checkAuthenticated()) {
+    //   await this.router.navigate([this.returnUrl]);
+    // }
+  }
 
-    async onSubmit(): Promise<void> {
-      this.loginInvalid = false;
-      this.formSubmitAttempt = false;
-      if (this.form.valid) {
-        try {
-          const username = this.form.get('username')?.value;
-          const password = this.form.get('password')?.value;
-          await this.router.navigate([this.form.get('area')?.value]);
-          await this.authService.login(username, password);
-        } catch (err) {
-          this.loginInvalid = true;
-        }
-      } else {
-        this.formSubmitAttempt = true;
+  async onSubmit(): Promise<void> {
+    this.loginInvalid = false;
+    this.formSubmitAttempt = false;
+    if (this.form.valid) {
+      try {
+        const username = this.form.get('username')?.value;
+        const password = this.form.get('password')?.value;
+        await this.router.navigate([this.form.get('area')?.value]);
+        //await this.authService.login(username, password);
+      } catch (err) {
+        this.loginInvalid = true;
       }
+    } else {
+      this.formSubmitAttempt = true;
     }
+  }
 }

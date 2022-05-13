@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-export interface Parent{
-  name:string,
-  submenu:Menu[]
+export interface Parent {
+  name: string,
+  submenu: Menu[]
 }
 export interface Menu {
   state: string;
@@ -13,13 +13,13 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-    name:"Entrada De Datos",
-    submenu:[
-      { state: 'user',type: 'link', name: 'Usuarios',  icon: 'person'},
-      { state: 'customer', type: 'link', name: 'Clientes', icon: 'store'},
-      { state: 'warehouse', type: 'link', name: 'Almacenes', icon: 'view_comfy'},
-      { state: 'unit', type: 'link', name: 'Unidades', icon: 'view_list'},
-      // { state: 'units', type: 'link', name: 'Unidades', icon: 'view_headline'},
+    name: "Entrada De Datos",
+    submenu: [
+      { state: 'user', type: 'link', name: 'Usuarios', icon: 'person' },
+      { state: 'customer', type: 'link', name: 'Clientes', icon: 'store' },
+      { state: 'warehouse', type: 'link', name: 'Almacenes', icon: 'view_comfy' },
+      { state: 'unit', type: 'link', name: 'Unidades', icon: 'view_list' },
+      { state: 'mode', type: 'link', name: 'Modos', icon: 'view_headline' },
       // { state: 'taxes', type: 'link', name: 'Impuestos', icon: 'tab'},
       // { state: 'supplier', type: 'link', name: 'Supplidores', icon: 'web'},
       // { state: 'department', type: 'link', name: 'Departamento', icon: 'web'},
@@ -29,11 +29,11 @@ const MENUITEMS = [
     ]
   },
   {
-    name:"Transacciones",
-    submenu:[
+    name: "Transacciones",
+    submenu: [
       // { state: 'brand', type: 'link', name: 'Act. de precios', icon: 'web'},
-      { state: 'gestion', name: 'Gestionar Ordenes', type: 'link', icon: 'av_timer'},
-      { state: 'orders', type: 'link', name: 'Recepcion de pedidos', icon: 'crop_7_5'},
+      { state: 'gestion', name: 'Gestionar Ordenes', type: 'link', icon: 'av_timer' },
+      { state: 'orders', type: 'link', name: 'Recepcion de pedidos', icon: 'crop_7_5' },
       // { state: 'grid', type: 'link', name: 'Ajustes de inventario', icon: 'view_comfy'},
       // { state: 'lists', type: 'link', name: 'Facturacion', icon: 'view_list'},
       // { state: 'menu', type: 'link', name: 'Despacho', icon: 'view_headline'},
@@ -42,8 +42,8 @@ const MENUITEMS = [
     ]
   },
   {
-    name:"Reportes",
-    submenu:[
+    name: "Reportes",
+    submenu: [
       // { state: 'presentation',type: 'link', name: 'Cambios de costo',  icon: 'av_timer'},
       // { state: 'product', type: 'link', name: 'Ventas', icon: 'crop_7_5'},
       // { state: 'customer', type: 'link', name: 'Inventario', icon: 'view_comfy'},
@@ -55,8 +55,8 @@ const MENUITEMS = [
     ]
   },
   {
-    name:"Controles",
-    submenu:[
+    name: "Controles",
+    submenu: [
       // { state: 'presentation',type: 'link', name: 'Reubicar Producto',  icon: 'av_timer'},
       // { state: 'product', type: 'link', name: 'Dividir zona', icon: 'crop_7_5'},
       // { state: 'customer', type: 'link', name: 'Reasignar pedido', icon: 'view_comfy'},
@@ -64,24 +64,24 @@ const MENUITEMS = [
     ]
   },
   {
-    name:"Utilitarios",
-    submenu:[
+    name: "Utilitarios",
+    submenu: [
       // { state: 'presentation',type: 'link', name: 'Presentaciones',  icon: 'av_timer'},
     ]
   },
   {
-    name:"Ayuda",
+    name: "Ayuda",
     submenu:
-    [
-      // {
-      //   state: 'expansion',
-      //   type: 'link',
-      //   name: 'Base de conocimiento',
-      //   icon: 'vertical_align_center'
-      // },
-      // { state: 'chips', type: 'link', name: 'Documentacion', icon: 'vignette'},
-      // { state: 'chips', type: 'link', name: 'Leira Asistent', icon: 'vignette'},
-    ]
+      [
+        // {
+        //   state: 'expansion',
+        //   type: 'link',
+        //   name: 'Base de conocimiento',
+        //   icon: 'vertical_align_center'
+        // },
+        // { state: 'chips', type: 'link', name: 'Documentacion', icon: 'vignette'},
+        // { state: 'chips', type: 'link', name: 'Leira Asistent', icon: 'vignette'},
+      ]
   },
 ];
 
