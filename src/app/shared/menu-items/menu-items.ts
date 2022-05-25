@@ -44,7 +44,7 @@ const MENUITEMS = [
   {
     name: "Reportes",
     submenu: [
-      // { state: 'presentation',type: 'link', name: 'Cambios de costo',  icon: 'av_timer'},
+      { state: 'stock', type: 'link', name: 'Inventario', icon: 'av_timer' },
       // { state: 'product', type: 'link', name: 'Ventas', icon: 'crop_7_5'},
       // { state: 'customer', type: 'link', name: 'Inventario', icon: 'view_comfy'},
       // { state: 'pickers', type: 'link', name: 'Pedidos', icon: 'view_list'},

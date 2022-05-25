@@ -7,6 +7,7 @@ import { CustomersComponent } from './cruds/customers/customers.component';
 import { WarehouseComponent } from './cruds/warehouse/warehouse.component';
 import { UnitComponent } from './cruds/unit/unit.component';
 import { ModeComponent } from './cruds/mode/mode.component';
+import { StockComponent } from './reports/stock/stock.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -40,5 +41,9 @@ export const MaterialRoutes: Routes = [
   {
     path: 'mode',
     component: ModeComponent
-  }
+  },
+  {
+    path: 'stock',
+    component: StockComponent
+  },
 ];

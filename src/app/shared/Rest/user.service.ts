@@ -38,7 +38,7 @@ export class UserService extends BaseService {
   }
 
   async UpdateUser() {
-    return await this.http.put<boolean>(this.apiUrl + "/" + this.formData.id.toString(), this.formData).toPromise();
+    return await this.http.put<boolean>(this.apiUrl + this.formData.id.toString(), this.formData).toPromise();
   }
 
   refleshList() {

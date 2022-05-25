@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  API:'http://localhost:8080/',
-  HUB:'http://localhost:8080/hubs'
+  API: 'http://localhost:8080/',
+  HUB: 'http://localhost:8080/hubs',
+  STOCKAPI: 'https://192.168.10.48:5002/api/fullstock'
 };

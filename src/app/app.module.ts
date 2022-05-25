@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
@@ -28,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './layouts/client/login/login.component';
 import { LockscreenComponent } from './layouts/lockscreen/lockscreen.component';
+import { AuthInterceptorProvider } from './shared/interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -54,15 +55,16 @@ import { LockscreenComponent } from './layouts/lockscreen/lockscreen.component';
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
-    RouterModule.forRoot(AppRoutes,{useHash:true})
+    RouterModule.forRoot(AppRoutes, { useHash: true })
   ],
   exports: [RouterModule],
   providers: [
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
-    }
+    },
+    AuthInterceptorProvider,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,291 @@
+<mat-card class="container Mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>PEDIDOS</mat-card-title>
+    <mat-card-subtitle>Esta ventana muestra los pedidos que pueden ser trabajados</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="example-rate-limit-reached" *ngIf="isLoadingResults">
+        PACIENCIA, SI ES LA PRIMERA VEZ ES POSIBLE QUE SU DURACION SEA APROXIMADAMENTE 1 HORA;
+      </div>
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        SOSOVISH-SLD-API No respondio a tiempo en varios intentos, intente luego mas tarde!
+      </div>
+    </div>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex." #input>
+    </mat-form-field>
+    <div class="example-button-row">
+      <button mat-button (click)="exportExcel()">Exportar</button>
+    </div>
+    <div class="table-container mat-elevation-z8">
+      <mat-table [dataSource]="data" matSort matSortActive="code" matSortDirection="asc" class="table">
+        <ng-container matColumnDef="0" sticky>
+          <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Codigo</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>Codigo</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="name" sticky>
+          <mat-header-cell mat-header-cell *matHeaderCellDef disableClear>Nombre</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>Nombre</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="1">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>1</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.cedisstgo.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>1</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max1">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.cedisstgoMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="2">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>2</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.sfmcentro.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>2</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max2">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.sfmcentroMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="3">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>3</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.sfmColonial.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>3</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max3">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.sfmColonialMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="4">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>4</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.guiza.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>4</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max4">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.guizaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="5">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>5</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.moca.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>5</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max5">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.mocaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="6">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>6</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.mao.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>6</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max6">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.maoMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="7">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>7</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.laMoraleja.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>7</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max7">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.laMoralejaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="8">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>8</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.rafaelVidal.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>8</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max8">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.rafaelVidalMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="9">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>9</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.antonioGuzman.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>9</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max9">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.antonioGuzmanMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="10">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>10</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.gurabo.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>10</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max10">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.guraboMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="12">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>12</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.villaOlimpica.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>12</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max12">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.villaOlimpicaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="13">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>13</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.ensanchezLibertad.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>13</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max13">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.ensanchezLibertadMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="14">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>14</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.cristoRey.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>14</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max14">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.cristoReyMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="15">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>15</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.lasAmericas.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>15</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max15">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.lasAmericasMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="16">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>16</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.tamboril.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>16</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max16">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.tamborilMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="17">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>17</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.republicaDeArgentina.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>17</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max17">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.republicaDeArgentinaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="18">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>18</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.restauracion.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>18</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max18">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.restauracionMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="19">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>19</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.jardinesMetropolitanos.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>19</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max19">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.jardinesMetropolitanosMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="20">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>20</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.rafaelvidaL2.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>20</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max20">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.rafaelvidaL2Max}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="21">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>21</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.losLaureles.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>21</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max21">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.losLaurelesMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="22">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>22</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.trinitaria.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>22</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max22">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.trinitariaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="51">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>51</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.guazumal.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>51</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max51">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.guazumalMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="57">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>57</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.bravoPontezuela.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>57</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max57">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.bravoPontezuelaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="58">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>58</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.esperanza.toFixed(4)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>58</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="max58">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Max</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element"> {{element.esperanzaMax}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>max</mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <!-- <mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></mat-footer-row> -->
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </mat-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[10,25,50,100,1000]" showFirstLastButtons aria-label="Select page of users">
+    </mat-paginator>
+
+  </mat-card-content>
+</mat-card>

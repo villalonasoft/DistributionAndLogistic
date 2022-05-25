@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {merge, Observable, of as observableOf} from 'rxjs';
-import { catchError,map, switchMap,startWith } from 'rxjs/operators';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, switchMap, startWith } from 'rxjs/operators';
 import { OrdersHeaders } from 'src/app/models/ordersHeaders.model';
 import { OrderServices } from 'src/app/shared/Rest/order.service';
 import { ModalHeaderComponent } from './modal/modal-header.component';
@@ -18,24 +18,24 @@ import { environment } from 'src/environments/environment';
 })
 export class OrderReceptionComponent implements AfterViewInit, OnInit {
 
-  displayedColumns: string[] = ['branch','mode','zones','dateinit','dateend','user','status','acciones'];
-  data:MatTableDataSource<OrdersHeaders>;
-  dataWorking:MatTableDataSource<OrdersHeaders>;
+  displayedColumns: string[] = ['branch', 'mode', 'zones', 'dateinit', 'dateend', 'user', 'status', 'acciones'];
+  data: MatTableDataSource<OrdersHeaders>;
+  dataWorking: MatTableDataSource<OrdersHeaders>;
 
   resultLength = 0;
   isLoadingResults = true;
-  isRateLimitReached=false;
+  isRateLimitReached = false;
 
-  @ViewChild(MatPaginator) paginator:MatPaginator;
-  @ViewChild(MatSort) sort:MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   private hubConnection: signalR.HubConnection;
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl(environment.HUB+'/headers')
-                            .configureLogging(signalR.LogLevel.Information)
-                            .build();
+      .withUrl(environment.HUB + '/headers')
+      .configureLogging(signalR.LogLevel.Information)
+      .build();
 
     this.hubConnection
       .start()
@@ -49,38 +49,38 @@ export class OrderReceptionComponent implements AfterViewInit, OnInit {
     });
   }
 
-  constructor(public service:OrderServices,public dialog:MatDialog) {
+  constructor(public service: OrderServices, public dialog: MatDialog) {
     this.dataWorking = new MatTableDataSource();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.startConnection();
     this.addTransferOrderDataListener();
   }
 
-  ngAfterViewInit(){
-    merge(this.sort.sortChange,this.paginator.page)
+  ngAfterViewInit() {
+    merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.service!.getAllHeaders().pipe(catchError(()=>observableOf(null)));
+          return this.service!.getAllHeaders().pipe(catchError(() => observableOf(null)));
         }),
-        map(data=>{
+        map(data => {
           this.isLoadingResults = false;
-          this.isRateLimitReached = data ===null;
-          if(data ===null){
+          this.isRateLimitReached = data === null;
+          if (data === null) {
             return [];
           }
           this.resultLength = data.length;
           return data;
         })
-      ).subscribe(data=>{
-        this.data = new MatTableDataSource(data.sort((x,y)=>{
-          if(x.zoneId>y.zoneId){
+      ).subscribe(data => {
+        this.data = new MatTableDataSource(data.sort((x, y) => {
+          if (x.zoneId > y.zoneId) {
             return 1;
           }
-          if(x.zoneId<y.zoneId){
+          if (x.zoneId < y.zoneId) {
             return -1;
           }
           return 0;
@@ -90,22 +90,23 @@ export class OrderReceptionComponent implements AfterViewInit, OnInit {
       });
   }
 
-  applyFilter(handle:Event){
+  applyFilter(handle: Event) {
     const filterValue = (handle.target as HTMLInputElement).value;
     this.data.filter = filterValue.trim().toLocaleLowerCase();
 
-    if(this.data.paginator){
+    if (this.data.paginator) {
       this.data.paginator.firstPage();
     }
   }
-  openDialog(orderId:number,branchId:number,zoneId:number){
-    const dialogRef = this.dialog.open(ModalHeaderComponent,{
-      data:{orderId:orderId,branchId:branchId,zoneId:zoneId},
+
+  openDialog(orderId: number, branchId: number, zoneId: number) {
+    const dialogRef = this.dialog.open(ModalHeaderComponent, {
+      data: { orderId: orderId, branchId: branchId, zoneId: zoneId },
       height: '800px',
       width: '1200px',
     });
 
-    dialogRef.afterClosed().subscribe(result=>{
+    dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog reult: ${result}`);
     });
   }

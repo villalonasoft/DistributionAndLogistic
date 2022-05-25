@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'client-header',
@@ -10,10 +9,9 @@ export class ClientHeaderComponent implements OnInit {
 
   title = 'Tic Tac Toe';
   isAuthenticated: boolean = false;
-  _auhService: AuthService;
 
-  constructor(private autService: AuthService) {
-    this._auhService = autService;
+  constructor() {
+
   }
 
   async ngOnInit(): Promise<void> {

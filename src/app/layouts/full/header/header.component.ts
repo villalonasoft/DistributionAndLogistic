@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/Services/auth.service';
+import { AuthService } from 'src/app/shared/Rest/auth.service';
+import { TokenService } from 'src/app/shared/Rest/token.service';
 
 @Component({
   selector: 'app-header',
@@ -10,18 +11,18 @@ export class AppHeaderComponent {
 
   title = 'Tic Tac Toe';
   isAuthenticated: boolean = false;
-  _auhService: AuthService;
 
-  constructor(private autService: AuthService) {
-    this._auhService = autService;
+  constructor(private authService: AuthService, private tokenService: TokenService) {
+
   }
 
   async ngOnInit(): Promise<void> {
-    //this.isAuthenticated = await this._auhService.checkAuthenticated();
+    this.isAuthenticated = await this.tokenService.isLoggedIn();
   }
 
   async logout(): Promise<void> {
     // todo
-    //this.autService.logout('/app/login');
+    this.tokenService.logout();
+    window.location.reload();
   }
 }

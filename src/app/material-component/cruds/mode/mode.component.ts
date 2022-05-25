@@ -20,7 +20,7 @@ export class ModeComponent implements OnInit {
     if (event.key == 'F12') {
       return true;
     }
-    return false;
+    console.log(event.key);
   }
 
   constructor(_modeService: ModeService, private _snackBar: MatSnackBar) {
