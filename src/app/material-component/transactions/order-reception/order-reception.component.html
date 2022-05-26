@@ -55,7 +55,7 @@
 
         <ng-container matColumnDef="acciones">
           <mat-header-cell mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let element"> <a [routerLink]=""
+          <mat-cell mat-cell *matCellDef="let element"> <a [routerLink]="[]"
               (click)="openDialog(element.orderId,element.branchId,element.zoneId)">Ver
               Detalle</a> | </mat-cell>
         </ng-container>
