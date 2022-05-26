@@ -28,6 +28,7 @@ import { WharehouseDetailComponent } from './cruds/warehouse/wharehouse-detail/w
 import { UnitComponent } from './cruds/unit/unit.component';
 import { ModeComponent } from './cruds/mode/mode.component';
 import { StockComponent } from './reports/stock/stock.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { StockComponent } from './reports/stock/stock.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    CdkTableModule,
+    QRCodeModule
   ],
   providers: [],
   declarations: [

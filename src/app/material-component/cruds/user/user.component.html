@@ -40,6 +40,9 @@
           </p>
           <div *ngIf="userService.edituser">
             <p>
+              <button mat-flat-button color="primary" type="button" (click)="toFactor()">2FA</button>
+            </p>
+            <p>
               <mat-checkbox [(ngModel)]="userService.formData.changePassword" name="changepassword">Cambiar Contraseña
               </mat-checkbox>
             </p>
@@ -57,6 +60,7 @@
           <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
           <button mat-flat-button color="primary" type="button" (click)="resetForm(form)">Cancelar</button>
         </form>
+        <qrcode [qrdata]="'myAngularxQrCode'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
       <div class="detail">
         <app-detail [style]="{width:'100%'}"></app-detail>

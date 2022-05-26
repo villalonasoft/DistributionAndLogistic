@@ -10,13 +10,13 @@ import { UserService } from 'src/app/shared/Rest/user.service';
 })
 export class DetailComponent implements OnInit {
 
-  constructor(public userService:UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.refleshList();
   }
 
-  populateForm(selectedRecord:UserView){
+  populateForm(selectedRecord: UserView) {
     let user = new UserCreate();
     user.id = selectedRecord.id;
     user.changePassword = false;
