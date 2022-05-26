@@ -6,7 +6,7 @@ import { OrderComponent } from './order/order.component';
 import { RouterModule } from '@angular/router';
 import { ExternalRoutes } from './external.routing';
 import { DemoMaterialModule } from '../demo-material-module';
-import { CdkTableModule } from '@angular/cdk/table';
+//import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -31,8 +31,8 @@ import { CreateOrderFormComponent } from './create-order/create-order-form/creat
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    //CdkTableModule
   ],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
 export class ExternalModule { }

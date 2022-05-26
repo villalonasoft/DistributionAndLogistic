@@ -60,7 +60,11 @@
           <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
           <button mat-flat-button color="primary" type="button" (click)="resetForm(form)">Cancelar</button>
         </form>
-        <qrcode [qrdata]="'myAngularxQrCode'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <div *ngIf="myAngularxQrCode!=''">
+          <qrcode [width]="512" [errorCorrectionLevel]="'M'" [qrdata]="myAngularxQrCode" allowEmptyString="true"
+            [scale]="'1'" [elementType]="'img'">
+          </qrcode>
+        </div>
       </div>
       <div class="detail">
         <app-detail [style]="{width:'100%'}"></app-detail>

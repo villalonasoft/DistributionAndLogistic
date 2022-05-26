@@ -19,8 +19,8 @@ export class AuthInterceptor implements HttpInterceptor {
     const requestForApis = request.url.startsWith(environment.API);
     const isLoggedIn = this.tokenService.isLoggedIn();
 
-    console.log('inside intercept');
-    console.log(`request is ${JSON.stringify(request.body)}`);
+    //console.log('inside intercept');
+    //console.log(`request is ${JSON.stringify(request.body)}`);
     if (isLoggedIn && requestForApis) {
       let session = this.tokenService.getSession();
       if (session) {

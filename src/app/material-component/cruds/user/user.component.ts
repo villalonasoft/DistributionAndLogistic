@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/Rest/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  public myAngularxQrCode: Uint8Array;
+  public myAngularxQrCode: string = '';
   hide = true;
   hidechangePassword = true;
 
@@ -43,7 +43,7 @@ export class UserComponent {
 
   async toFactor() {
     const result = await this.authService.getQr();
-    this.myAngularxQrCode = result.secret;
+    this.myAngularxQrCode = result.secretKey;
   }
   async updateRecord(form: NgForm) {
     var result = await this.userService.UpdateUser();
