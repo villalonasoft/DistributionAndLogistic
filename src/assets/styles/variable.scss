@@ -4,6 +4,7 @@ Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
 */
+@use '~@angular/material' as mat;
 // Variables
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
 
@@ -14,33 +15,33 @@ $headingfont: 'Poppins', sans-serif;
 
 /*Material Theme Colors*/
 
-$primary: mat-palette($mat-blue, 600);
-$accent: mat-palette($mat-indigo, 500);
-$warn: mat-palette($mat-pink, 500);
-$theme: mat-light-theme($primary, $accent, $warn);
+$primary: mat.define-palette(mat.$blue-palette, 600);
+$accent: mat.define-palette(mat.$indigo-palette, 500);
+$warn: mat.define-palette(mat.$pink-palette, 500);
+$theme: mat.define-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
 
-@include mat-core();
+@include mat.core();
 
-$custom-typography: mat-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: 'Poppins, sans-serif'
 );
 
 // Override the typography in the core CSS.
-@include mat-core($custom-typography);
+@include mat.core($custom-typography);
 
 // Default Theme
-@include angular-material-theme($theme);
+@include mat.all-component-themes($theme);
 
 // Dark Theme
 /* ======== Angular material custom themes ======== */
-$my-custom-primary: mat-palette($mat-blue-gray,300);
-$my-custom-accent: mat-palette($mat-blue-gray, 900);
-$my-custom-warn: mat-palette($mat-red,600);
-$my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);
+$my-custom-primary: mat.define-palette(mat.$blue-gray-palette,300);
+$my-custom-accent: mat.define-palette(mat.$blue-gray-palette, 900);
+$my-custom-warn: mat.define-palette(mat.$red-palette,600);
+$my-custom-theme: mat.define-light-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);
 
-@include angular-material-theme($my-custom-theme);
+@include mat.all-component-themes($my-custom-theme);
 
 
 
