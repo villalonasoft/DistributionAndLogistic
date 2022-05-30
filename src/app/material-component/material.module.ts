@@ -29,6 +29,7 @@ import { UnitComponent } from './cruds/unit/unit.component';
 import { ModeComponent } from './cruds/mode/mode.component';
 import { StockComponent } from './reports/stock/stock.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { TwoFactorModalComponent } from './cruds/user/two-factor-modal/two-factor-modal.component';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     UnitComponent,
     ModeComponent,
     StockComponent,
+    TwoFactorModalComponent,
   ]
 })
 export class MaterialComponentsModule { }

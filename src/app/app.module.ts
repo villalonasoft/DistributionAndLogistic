@@ -45,7 +45,7 @@ import { AuthInterceptorProvider } from './shared/interceptors/auth.interceptor'
     ClientSidebarComponent,
     ClientHeaderComponent,
     LoginComponent,
-    LockscreenComponent
+    LockscreenComponent,
   ],
   imports: [
     BrowserModule,

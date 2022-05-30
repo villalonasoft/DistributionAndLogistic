@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserCreate } from 'src/app/models/userCreate.model';
 import { AuthService } from 'src/app/shared/Rest/auth.service';
 import { UserService } from 'src/app/shared/Rest/user.service';
+import { TwoFactorModalComponent } from './two-factor-modal/two-factor-modal.component';
 
 @Component({
   selector: 'app-user',
@@ -11,15 +13,12 @@ import { UserService } from 'src/app/shared/Rest/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
-  public myAngularxQrCode: string = '';
   hide = true;
   hidechangePassword = true;
 
   userService: UserService;
-  authService: AuthService;
-  constructor(_userService: UserService, _authService: AuthService, private _snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, _userService: UserService, private _snackBar: MatSnackBar) {
     this.userService = _userService;
-    this.authService = _authService;
   }
 
   onSubmit(form: NgForm): void {
@@ -41,10 +40,18 @@ export class UserComponent {
     }
   }
 
-  async toFactor() {
-    const result = await this.authService.getQr();
-    this.myAngularxQrCode = result.secretKey;
+  async toFactor(userId: number) {
+    const dialogRef = this.dialog.open(TwoFactorModalComponent, {
+      data: { userId: userId },
+      height: '800px',
+      width: '1200px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog reult: ${result}`);
+    });
   }
+
   async updateRecord(form: NgForm) {
     var result = await this.userService.UpdateUser();
     if (result) {
